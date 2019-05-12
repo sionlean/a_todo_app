@@ -21,6 +21,8 @@ class Navbar extends Component {
           addList={this.props.addList}
           colors={this.props.colors}
           curCat={this.props.curCat}
+          priority={this.props.priority}
+          handlePriority={this.props.handlePriority}
         />
       </div>
     );

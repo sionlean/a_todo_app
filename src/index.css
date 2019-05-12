@@ -1,19 +1,94 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|Varela+Round");
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background-color: #e8e7e5;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+body.dark {
+  background-color: #54627a;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 150s linear;
+  height: 500px;
+}
+
+.cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.75;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .navbar {
-  background-color: #ccc;
+  background-color: #b7c0c9;
+  font-family: "Open Sans", sans-serif;
+}
+.form {
+  background-color: #b7c0c9;
+  font-family: "Varela Round", sans-serif;
+}
+
+.theme {
+  z-index: 4;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.theme > span {
+  z-index: 4;
+  color: black;
+  width: 20px;
+  height: 20px;
+}
+
+.form {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.submit,
+.set {
+  color: white;
+  background-color: #9391ae;
+}
+
+.submit:hover,
+.set:hover {
+  background-color: #708292;
+  color: white;
+}
+
+.reset {
+  background-color: #54556f;
+}
+
+.reset:hover {
+  background-color: #696969;
 }
 
 .header {
   position: fixed;
   width: 100%;
   z-index: 2;
-  box-shadow: 5px 5px 5px #ccc;
+  box-shadow: 5px 5px 5px #444;
 }
 
 .blank {
@@ -21,14 +96,27 @@ body {
   height: 200px;
 }
 
-.counterList {
-  margin: 10px auto;
+.counterList,
+.toggleView,
+.timer,
+.filter {
+  margin: 10px auto 30px auto;
   background-color: rgba(211, 211, 211, 0.5);
   padding: 10px 0 20px 0;
   border-radius: 10px;
-  width: 70%;
+  width: 95%;
   text-align: center;
   box-shadow: 2px 2px 2px #ccc;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.timer > span {
+  margin: 5px;
+}
+
+.filter {
+  padding: 20px;
 }
 
 .counterList > p {
@@ -44,27 +132,20 @@ body {
 
 .sidenav {
   flex: 2;
-  background-color: rgba(150, 150, 175, 0.6);
+  background-color: rgba(150, 150, 175, 0.9);
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 5px 5px 5px #ccc;
-  margin: 0 2rem;
-  max-height: 800px;
+  box-shadow: 5px 5px 10px #62627c;
+  margin: 0 2rem 2rem 2rem;
+  height: 1050px;
+  width: 400px;
+  min-width: 400px;
+  font-family: "Open Sans", sans-serif;
 }
 
 .sidenav:hover {
   transform: scale(1.02);
   transition: all 0.3s linear;
-}
-
-.toggleView {
-  margin: 10px auto 30px auto;
-  background-color: rgba(211, 211, 211, 0.5);
-  padding: 10px 0 20px 0;
-  border-radius: 10px;
-  width: 70%;
-  text-align: center;
-  box-shadow: 2px 2px 2px #ccc;
 }
 
 .toggleView > p {
@@ -75,7 +156,7 @@ body {
 .toggleView > span {
   font-size: 2.5rem;
   margin: 0px 10px 0px 10px;
-  color: lightcoral;
+  color: rgb(183, 255, 225);
   cursor: pointer;
   transition: 0.2s linear all;
 }
@@ -94,14 +175,13 @@ body {
 }
 
 .listitem {
-  margin: 10px;
+  margin: 2px 20px 5px 0px;
+  font-family: "Varela Round", sans-serif;
 }
 
 .listitemgrid {
   width: 350px;
   height: 350px;
-  max-width: 350x;
-  max-height: 350px;
   position: relative;
 }
 
@@ -118,6 +198,12 @@ body {
   position: absolute;
   top: 15px;
   right: -30px;
+}
+
+.listitemgrid > .fa-exclamation-circle {
+  position: absolute;
+  top: 15px;
+  left: 60px;
 }
 
 .listitemgrid > label {
@@ -145,18 +231,6 @@ body {
   display: flex;
 }
 
-.filter {
-  margin: 10px auto;
-  background-color: rgba(211, 211, 211, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 70%;
-  font-size: 1.2rem;
-  font-weight: bold;
-  min-height: 140px;
-  box-shadow: 2px 2px 2px #ccc;
-}
 .header .selector {
   width: 15%;
   height: 50px;
@@ -164,4 +238,50 @@ body {
 
 .sidenav .selector {
   width: 70%;
+}
+
+.note {
+  margin: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .flex {
+    margin: auto;
+    flex-direction: column;
+  }
+
+  .sidenav {
+    margin: 0 0 2rem 0rem;
+  }
+
+  .listgrid {
+    margin: 0 0 2rem 2rem;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+
+  .cover {
+    position: fixed;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .flex {
+    margin: auto;
+    flex-direction: column;
+  }
+
+  .sidenav {
+    margin: 0 auto 2rem auto;
+  }
+
+  .listgrid {
+    margin: 0 auto 2rem auto;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+
+  .cover {
+    position: fixed;
+  }
 }

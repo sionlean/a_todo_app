@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Category from "./Category";
+import Priority from "./Priority";
 
 class UserInput extends Component {
   state = {
@@ -19,6 +20,7 @@ class UserInput extends Component {
   render() {
     return (
       <form
+        className="form"
         onSubmit={this.onSubmit}
         style={{ display: "flex", padding: "10px" }}
       >
@@ -34,7 +36,11 @@ class UserInput extends Component {
           required
         />
         <Category colors={this.props.colors} curCat={this.props.curCat} />
-        <input style={{ flex: 1 }} className="btn btn-primary" type="submit" />
+        <Priority
+          priority={this.props.priority}
+          handlePriority={this.props.handlePriority}
+        />
+        <input style={{ flex: 1 }} className="btn submit" type="submit" />
       </form>
     );
   }

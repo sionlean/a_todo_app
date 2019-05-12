@@ -5,7 +5,7 @@ class List extends Component {
   //To contain list items
   render() {
     return (
-      <div className="list listgrid">
+      <div className="list">
         {this.props.items.map(item => (
           <ListItem
             key={item.id}

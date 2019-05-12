@@ -7,7 +7,8 @@ class Reset extends Component {
       <div>
         <button
           onClick={this.props.onReset}
-          className="btn btn-danger navbar-btn"
+          style={{ border: "none", color: "white" }}
+          className="btn navbar-btn reset"
         >
           Reset
         </button>

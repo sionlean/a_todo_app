@@ -43,17 +43,30 @@ class ListItem extends Component {
     )[0].icon;
   };
 
+  //Color Styling for priority Icon
+  priorityStyle = () => {
+    return {
+      color: this.props.item.priorityColor,
+      fontSize: "2rem",
+      marginLeft: "0.5rem"
+    };
+  };
+
   //Create list items
   render() {
     const { item } = this.props;
     return (
       <div
         style={this.chooseCat()}
-        className="listitem text-light p-3 clearfix rounded align-items-center listitemgrid"
+        className="listitem text-light p-3 clearfix rounded align-items-center"
       >
         <span
           style={{ fontSize: "2.5rem", color: "#555", width: "50px" }}
           className={this.chooseIcon()}
+        />
+        <span
+          style={this.priorityStyle()}
+          className="fa fa-exclamation-circle"
         />
         <input
           className="align-middle"
