@@ -5,17 +5,18 @@ import ClearCompleted from "./ClearCompleted";
 class CounterList extends Component {
   state = {};
   render() {
+    const { items, colors, clearCompleted } = this.props;
     return (
       <div className="counterList">
         <p> Counters </p>
-        <span className="badge m-1">{this.props.items.length}</span>
+        <span className="badge m-1">{items.length}</span>
         <div>
-          {this.props.colors.map(color => (
-            <Counter key={color.name} color={color} items={this.props.items} />
+          {colors.map(color => (
+            <Counter key={color.name} color={color} items={items} />
           ))}
         </div>
         <br />
-        <ClearCompleted clearCompleted={this.props.clearCompleted} />
+        <ClearCompleted clearCompleted={clearCompleted} />
       </div>
     );
   }

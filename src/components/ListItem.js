@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ContentEditable from "react-contenteditable";
 
 class ListItem extends Component {
+  // const {item, toggle, onDelete, saveEdit, colors} = this.props;
+
   toggle = () => {
     return {
       textDecoration: this.props.item.completed ? "line-through" : "none",
@@ -14,8 +16,9 @@ class ListItem extends Component {
   };
 
   saveEdit = e => {
-    this.props.item.title = e.target.value;
-    this.props.saveEdit(this.props.item);
+    const { item, saveEdit } = this.props;
+    item.title = e.target.value;
+    saveEdit(item);
   };
 
   //Bin Icom Styling
@@ -29,18 +32,17 @@ class ListItem extends Component {
 
   //Dynamically choose bg color based on category
   chooseCat = () => {
-    const itemColor = this.props.colors.filter(
-      color => color.name === this.props.item.category
-    )[0].color;
-    const filter = this.props.item.display;
+    const { colors, item } = this.props;
+    const itemColor = colors.filter(color => color.name === item.category)[0]
+      .color;
+    const filter = item.display;
     return { background: itemColor, display: filter };
   };
 
   //Choose Icon
   chooseIcon = () => {
-    return this.props.colors.filter(
-      color => color.name === this.props.item.category
-    )[0].icon;
+    const { colors, item } = this.props;
+    return colors.filter(color => color.name === item.category)[0].icon;
   };
 
   //Color Styling for priority Icon
@@ -54,7 +56,12 @@ class ListItem extends Component {
 
   //Create list items
   render() {
-    const { item } = this.props;
+    const {
+      item: { id, title },
+      toggle,
+      onDelete,
+      saveEdit
+    } = this.props;
     return (
       <div
         style={this.chooseCat()}
@@ -72,13 +79,13 @@ class ListItem extends Component {
           className="align-middle"
           style={{ flex: 1, width: 30, height: 30 }}
           type="checkbox"
-          onChange={this.props.toggle.bind(this, item.id)}
+          onChange={toggle.bind(this, id)}
         />
         <label style={this.toggle()}>
-          <ContentEditable html={item.title} onChange={this.saveEdit} />
+          <ContentEditable html={title} onChange={saveEdit} />
         </label>
         <span
-          onClick={this.props.onDelete.bind(this, item.id)}
+          onClick={onDelete.bind(this, id)}
           className="fa fa-trash"
           style={this.binStyle}
         >

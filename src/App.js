@@ -201,7 +201,6 @@ class App extends Component {
   //setting priority color to state
   handlePriority = pri => {
     const colorState = this.state.priority.filter(name => name.name === pri);
-    console.log(colorState[0].color);
     this.setState({ curPri: colorState[0].color });
   };
 

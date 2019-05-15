@@ -4,28 +4,29 @@ class Counter extends Component {
   state = {};
 
   btnStyle = () => {
+    const { color } = this.props;
     return {
-      backgroundColor: this.props.color.color,
+      backgroundColor: color.color,
       width: "80%",
       fontWeight: "bold"
     };
   };
 
   counters = () => {
-    return this.props.items.filter(
-      item => item.category === this.props.color.name
-    ).length;
+    const { items, color } = this.props;
+    return items.filter(item => item.category === color.name).length;
   };
 
   render() {
+    const { color } = this.props;
     return (
       <div>
         <button type="button" className="btn btn-basic" style={this.btnStyle()}>
           <span
             style={{ fontSize: "1.5rem", color: "#555", float: "left" }}
-            className={this.props.color.icon}
+            className={color.icon}
           />
-          {this.props.color.name}
+          {color.name}
 
           <span
             style={{

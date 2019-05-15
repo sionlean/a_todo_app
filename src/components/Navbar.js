@@ -6,6 +6,14 @@ class Navbar extends Component {
   state = {};
 
   render() {
+    const {
+      addList,
+      colors,
+      curCat,
+      priority,
+      handlePriority,
+      onReset
+    } = this.props;
     return (
       <div className="header">
         <nav className="navbar navbar-inverse">
@@ -14,15 +22,15 @@ class Navbar extends Component {
               <p className="navbar-brand">To-Do List</p>
             </div>
 
-            <Reset onReset={this.props.onReset} />
+            <Reset onReset={onReset} />
           </div>
         </nav>
         <UserInput
-          addList={this.props.addList}
-          colors={this.props.colors}
-          curCat={this.props.curCat}
-          priority={this.props.priority}
-          handlePriority={this.props.handlePriority}
+          addList={addList}
+          colors={colors}
+          curCat={curCat}
+          priority={priority}
+          handlePriority={handlePriority}
         />
       </div>
     );

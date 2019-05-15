@@ -11,13 +11,14 @@ class Priority extends Component {
   };
 
   render() {
+    const { priority } = this.props;
     return (
       <select
         className="selector selectpicker p-1 form-control"
         onChange={this.handleChange}
         value={this.state.priority}
       >
-        {this.props.priority.map(pri => (
+        {priority.map(pri => (
           <option
             key={pri.name}
             value={pri.name}

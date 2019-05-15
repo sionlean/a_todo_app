@@ -3,11 +3,9 @@ import React, { Component } from "react";
 class ClearCompleted extends Component {
   state = {};
   render() {
+    const { clearCompleted } = this.props;
     return (
-      <button
-        onClick={this.props.clearCompleted}
-        className="btn btn-danger btn-md"
-      >
+      <button onClick={clearCompleted} className="btn btn-danger btn-md">
         Clear Completed
       </button>
     );

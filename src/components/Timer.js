@@ -8,20 +8,22 @@ class Timer extends Component {
   };
 
   setHour = e => {
-    this.setState({ timeHour: e.target.value });
+    const { value } = e.target;
+    this.setState({ timeHour: value });
   };
 
   setMin = e => {
-    this.setState({ timeMin: e.target.value });
+    const { value } = e.target;
+    this.setState({ timeMin: value });
   };
 
   setText = e => {
-    this.setState({ note: e.target.value });
+    const { value } = e.target;
+    this.setState({ note: value });
   };
 
   submitTimer = e => {
     e.preventDefault();
-    console.log(this.state.timeHour, this.state.timeMin, this.state.note);
     this.props.timer(this.state.timeHour, this.state.timeMin, this.state.note);
     this.setState({ timeHour: "" });
     this.setState({ timeMin: "" });

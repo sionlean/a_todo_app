@@ -18,6 +18,7 @@ class UserInput extends Component {
   };
 
   render() {
+    const { colors, curCat, priority, handlePriority } = this.props;
     return (
       <form
         className="form"
@@ -35,11 +36,8 @@ class UserInput extends Component {
           maxLength="135"
           required
         />
-        <Category colors={this.props.colors} curCat={this.props.curCat} />
-        <Priority
-          priority={this.props.priority}
-          handlePriority={this.props.handlePriority}
-        />
+        <Category colors={colors} curCat={curCat} />
+        <Priority priority={priority} handlePriority={handlePriority} />
         <input style={{ flex: 1 }} className="btn submit" type="submit" />
       </form>
     );

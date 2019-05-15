@@ -10,19 +10,21 @@ class Category extends Component {
   };
 
   handleChange = e => {
+    const { curCat } = this.props;
     const cat = e.target.value;
-    this.props.curCat(cat);
+    curCat(cat);
     this.setState({ curCat: e.target.value });
   };
 
   render() {
+    const { colors } = this.props;
     return (
       <select
         className="selector selectpicker p-1 form-control"
         value={this.state.curCat}
         onChange={this.handleChange}
       >
-        {this.props.colors.map(color => (
+        {colors.map(color => (
           <option
             key={color.name}
             value={color.name}
