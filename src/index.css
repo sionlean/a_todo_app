@@ -14,8 +14,9 @@ body.dark {
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 150s linear;
-  height: 500px;
+  animation: App-logo-spin infinite 7s linear;
+  height: 75px;
+  margin-right: 125px;
 }
 
 .cover {
