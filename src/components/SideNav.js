@@ -15,7 +15,6 @@ class SideNav extends Component {
       clearCompleted,
       colors,
       items,
-      curCat,
       filterOff,
       filter,
       timer
@@ -47,7 +46,6 @@ class SideNav extends Component {
         />
         <Filter
           colors={colors}
-          curCat={curCat}
           items={items}
           filter={filter}
           filterOff={filterOff}

@@ -37,12 +37,28 @@ body.dark {
 }
 
 .navbar {
+  z-index: 2;
   background-color: #b7c0c9;
   font-family: "Open Sans", sans-serif;
+}
+
+.btn {
+  transition: 0.3s all ease-out;
 }
 .form {
   background-color: #b7c0c9;
   font-family: "Varela Round", sans-serif;
+  transition: 0.5s all ease-out;
+  box-shadow: 5px 5px 5px #444;
+}
+
+.form.hide {
+  transform: translate3d(0, -100%, 0);
+}
+
+.showInput {
+  border-radius: 50%;
+  background-color: #556677;
 }
 
 .theme {
@@ -88,7 +104,6 @@ body.dark {
   position: fixed;
   width: 100%;
   z-index: 2;
-  box-shadow: 5px 5px 5px #444;
 }
 
 .blank {
@@ -113,6 +128,7 @@ body.dark {
 
 .timer > span {
   margin: 5px;
+  border-radius: 10px;
 }
 
 .filter {
@@ -136,16 +152,25 @@ body.dark {
   padding: 10px;
   border-radius: 10px;
   box-shadow: 5px 5px 10px #62627c;
-  margin: 0 2rem 2rem 2rem;
+  margin: 1rem 2rem 2rem 2rem;
   height: 1050px;
   width: 400px;
   min-width: 400px;
   font-family: "Open Sans", sans-serif;
+  transition: all 0.5s ease-out;
+}
+
+.sidenav.remove {
+  transform: translate3d(-110%, 0, 0);
 }
 
 .sidenav:hover {
   transform: scale(1.02);
   transition: all 0.3s linear;
+}
+
+.sideBtn {
+  transition: all 0.5s linear;
 }
 
 .toggleView > p {
@@ -166,6 +191,7 @@ body.dark {
 }
 
 .list {
+  margin-top: 1rem;
   flex: 10;
 }
 

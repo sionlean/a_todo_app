@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import UserInput from "./UserInput";
+import HideSideNav from "./HideSideNav";
+import HideUserInput from "./HideUserInput";
 import Reset from "./Reset";
 
 class Navbar extends Component {
@@ -18,8 +20,11 @@ class Navbar extends Component {
       <div className="header">
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
+            <HideSideNav />
             <div className="navbar-header" style={{ margin: "auto" }}>
-              <p className="navbar-brand">To-Do List</p>
+              <p className="navbar-brand">
+                To-Do List <HideUserInput />
+              </p>
             </div>
 
             <Reset onReset={onReset} />
