@@ -15,7 +15,6 @@ class SideNav extends Component {
       clearCompleted,
       colors,
       items,
-      filterOff,
       filter,
       timer
     } = this.props;
@@ -25,17 +24,7 @@ class SideNav extends Component {
           <p>Toggle View</p>
           <span onClick={lightTheme} className="fa fa-sun-o" />
           <span onClick={darkTheme} className="fa fa-moon-o" />
-          <p
-            style={{
-              display: "inline",
-              fontSize: "2.7rem",
-              color: "grey",
-              cursor: "default"
-            }}
-          >
-            {" "}
-            |{" "}
-          </p>
+          <p className="sep"> | </p>
           <span onClick={blockView} className="fa fa-th" />
           <span onClick={listView} className="fa fa-list" />
         </div>
@@ -44,12 +33,7 @@ class SideNav extends Component {
           colors={colors}
           clearCompleted={clearCompleted}
         />
-        <Filter
-          colors={colors}
-          items={items}
-          filter={filter}
-          filterOff={filterOff}
-        />
+        <Filter colors={colors} items={items} filter={filter} />
         <Timer timer={timer} />
       </div>
     );

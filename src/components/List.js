@@ -6,7 +6,7 @@ class List extends Component {
   render() {
     const { items, toggle, onDelete, saveEdit, colors } = this.props;
     return (
-      <div className="list">
+      <div className="list listgrid">
         {items.map(item => (
           <ListItem
             key={item.id}

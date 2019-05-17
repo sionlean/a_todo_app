@@ -22,16 +22,15 @@ class Navbar extends Component {
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <HideSideNav />
-            <div className="navbar-header" style={{ margin: "auto" }}>
-              <div className="cover">
-                <img src={logo} className="App-logo" alt="logo" />
-              </div>
+            <div className="cover">
+              <img src={logo} className="App-logo" alt="logo" />
+            </div>
+            <div className="navbar-header">
               <p className="navbar-brand">
                 To-Do List <HideUserInput />
               </p>
+              <Reset onReset={onReset} />
             </div>
-
-            <Reset onReset={onReset} />
           </div>
         </nav>
         <UserInput

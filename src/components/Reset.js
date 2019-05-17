@@ -5,15 +5,13 @@ class Reset extends Component {
   render() {
     const { onReset } = this.props;
     return (
-      <div>
-        <button
-          onClick={onReset}
-          style={{ border: "none", color: "white" }}
-          className="btn navbar-btn reset"
-        >
-          Reset
-        </button>
-      </div>
+      <button
+        onClick={onReset}
+        style={{ border: "none", color: "white" }}
+        className="btn navbar-btn reset"
+      >
+        Reset
+      </button>
     );
   }
 }

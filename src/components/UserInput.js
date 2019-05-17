@@ -27,7 +27,6 @@ class UserInput extends Component {
       >
         <input
           className="rounded form-control"
-          style={{ flex: 5, padding: 10, height: "50px" }}
           type="text"
           name="title"
           placeholder=" Type Something..."

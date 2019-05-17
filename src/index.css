@@ -4,13 +4,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #e8e7e5;
+  background-color: #d8d7d5;
   background-attachment: fixed;
   background-size: cover;
 }
 
 body.dark {
-  background-color: #54627a;
+  background-color: #74828a;
 }
 
 .App-logo {
@@ -22,7 +22,7 @@ body.dark {
 .cover {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 100%;
   transform: translate(-50%, -50%);
   z-index: -1;
   opacity: 0.75;
@@ -39,22 +39,27 @@ body.dark {
 
 .navbar {
   z-index: 2;
-  background-color: #b7c0c9;
+  background-color: #879099;
   font-family: "Open Sans", sans-serif;
+}
+
+.navbar > .container-fluid {
+  display: inline-block;
+  text-align: center;
 }
 
 .btn {
   transition: 0.3s all ease-out;
 }
 .form {
-  background-color: #b7c0c9;
+  background-color: #879099;
   font-family: "Varela Round", sans-serif;
   transition: 0.5s all ease-out;
   box-shadow: 5px 5px 5px #444;
 }
 
-.form.hide {
-  transform: translate3d(0, -100%, 0);
+.hide {
+  transform: translate3d(0, -70px, 0);
 }
 
 .showInput {
@@ -95,6 +100,8 @@ body.dark {
 
 .reset {
   background-color: #54556f;
+  margin-left: 50px;
+  margin-top: 6px;
 }
 
 .reset:hover {
@@ -127,13 +134,21 @@ body.dark {
   font-weight: bold;
 }
 
-.timer > span {
+.timer input,
+.timer textarea {
   margin: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
-.filter {
-  padding: 20px;
+.filter .form-control {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.form > input.form-control {
+  flex: 5;
+  padding: 10;
+  height: 50px;
 }
 
 .counterList > p {
@@ -156,13 +171,17 @@ body.dark {
   margin: 1rem 2rem 2rem 2rem;
   height: 1050px;
   width: 400px;
-  min-width: 400px;
+  max-width: 400px;
   font-family: "Open Sans", sans-serif;
   transition: all 0.5s ease-out;
 }
 
-.sidenav.remove {
-  transform: translate3d(-110%, 0, 0);
+.remove {
+  transform: translate3d(-580px, 0, 0);
+}
+
+.sidenav.display {
+  display: none;
 }
 
 .sidenav:hover {
@@ -172,6 +191,17 @@ body.dark {
 
 .sideBtn {
   transition: all 0.5s linear;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  padding: 5px;
+}
+
+.sep {
+  display: inline;
+  font-size: 2.7rem;
+  color: grey;
+  cursor: default;
 }
 
 .toggleView > p {
@@ -192,6 +222,7 @@ body.dark {
 }
 
 .list {
+  transition: all 0.5s ease-out;
   margin-top: 1rem;
   flex: 10;
 }
@@ -235,6 +266,7 @@ body.dark {
 
 .listitemgrid > label {
   width: 300px;
+  padding-top: 50px;
 }
 
 .listitemgrid > .align-middle {
@@ -256,6 +288,7 @@ body.dark {
 
 .flex {
   display: flex;
+  transition: 0.5s all ease-out;
 }
 
 .header .selector {
@@ -272,29 +305,55 @@ body.dark {
 }
 
 @media screen and (max-width: 767px) {
+  /* Allow Column view */
   .flex {
-    margin: auto;
+    margin: 2rem auto;
     flex-direction: column;
   }
-
+  /* Hide React Icon */
+  .cover {
+    display: none;
+  }
+  /* Adjust input width @ userinput */
+  .form > input.form-control {
+    flex: 1.75;
+  }
+  /* move list items up when Sidenav is hidden */
+  .list.remove {
+    transform: translate3d(0, -1100px, 0);
+  }
+  /* adjust sidenav to fit screen */
   .sidenav {
     margin: 0 0 2rem 0rem;
   }
-
+  /* increase textarea width */
+  textarea {
+    width: 80%;
+  }
+  /* Downsize size of title */
+  .navbar-header p {
+    font-size: 1.7rem;
+  }
+  /* Adjust list items */
   .listgrid {
-    margin: 0 0 2rem 2rem;
+    margin-left: 1.7rem;
     grid-template-columns: 1fr;
-    grid-gap: 2rem;
+    grid-gap: 1rem;
+  }
+  /* Remove toggle view button for phone */
+  .fa-list,
+  .fa-th,
+  .sep {
+    display: none;
   }
 
-  .cover {
-    position: fixed;
+  .flex {
+    margin-top: 0;
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .flex {
-    margin: auto;
     flex-direction: column;
   }
 
@@ -302,13 +361,29 @@ body.dark {
     margin: 0 auto 2rem auto;
   }
 
+  .remove {
+    transform: translate3d(-600px, 0, 0);
+  }
+
   .listgrid {
-    margin: 0 auto 2rem auto;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
   }
 
-  .cover {
-    position: fixed;
+  .list {
+    margin-left: 1.5rem;
+  }
+
+  .list.remove {
+    transform: translate3d(0, -1100px, 0);
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .remove {
+    transform: translate3d(-450px, 0, 0);
+  }
+  .list.remove {
+    transform: translate3d(-200px, 0, 0);
   }
 }

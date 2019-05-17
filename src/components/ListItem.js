@@ -65,7 +65,7 @@ class ListItem extends Component {
     return (
       <div
         style={this.chooseCat()}
-        className="listitem text-light p-3 clearfix rounded align-items-center"
+        className="listitem listitemgrid text-light p-3 clearfix rounded align-items-center"
       >
         <span
           style={{ fontSize: "2.5rem", color: "#555", width: "50px" }}

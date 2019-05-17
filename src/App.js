@@ -98,10 +98,10 @@ class App extends Component {
       }
     ],
     colors: [
-      { name: "Family", color: "#adbdcf", icon: "fa fa-home" },
-      { name: "Friends", color: "#e9c1a1", icon: "fa fa-users" },
-      { name: "Work", color: "#f0bfe1", icon: "fa fa-briefcase" },
-      { name: "Others", color: "#7fd7ac", icon: "fa fa-archive" }
+      { name: "Family", color: "#4D6D9A", icon: "fa fa-home" },
+      { name: "Friends", color: "#86B3D1", icon: "fa fa-users" },
+      { name: "Work", color: "#99CED3", icon: "fa fa-briefcase" },
+      { name: "Others", color: "#EDB5BF", icon: "fa fa-archive" }
     ],
     curCat: "Others",
     curPri: "rgba(255, 255, 255, 0.0)",
@@ -172,19 +172,23 @@ class App extends Component {
 
   // Filter Category
   filter = cat => {
-    this.setState({
-      items: this.state.items.map(item => {
-        return (item.display = "flex"); //remove return
-      })
-    });
-    this.setState({
-      items: this.state.items.map(item => {
-        if (item.category !== cat) {
-          item.display = "none";
-        }
-        return item;
-      })
-    });
+    if (cat === "All") {
+      this.filterOff();
+    } else {
+      this.setState({
+        items: this.state.items.map(item => {
+          return (item.display = "flex"); //remove return
+        })
+      });
+      this.setState({
+        items: this.state.items.map(item => {
+          if (item.category !== cat) {
+            item.display = "none";
+          }
+          return item;
+        })
+      });
+    }
   };
 
   //Off Filter
@@ -260,7 +264,6 @@ class App extends Component {
             colors={this.state.colors}
             clearCompleted={this.clearCompleted}
             filter={this.filter}
-            filterOff={this.filterOff}
             timer={this.timer}
             darkTheme={this.darkTheme}
             lightTheme={this.lightTheme}

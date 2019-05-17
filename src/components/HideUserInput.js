@@ -6,8 +6,10 @@ class HideUserInput extends Component {
   toggleInput = () => {
     const form = document.getElementsByClassName("form");
     const btn = document.getElementsByClassName("showInputBtn");
+    const flex = document.getElementsByClassName("flex");
     const btnState = btn[0].classList.contains("fa-plus");
     form[0].classList.toggle("hide");
+    flex[0].classList.toggle("hide");
     if (btnState) {
       btn[0].classList.replace("fa-plus", "fa-minus");
     } else {

@@ -6,7 +6,9 @@ class HideSideNav extends Component {
   addShow = () => {
     const sideNav = document.getElementsByClassName("sidenav");
     const btn = document.getElementsByClassName("sideBtn");
+    const list = document.getElementsByClassName("list");
     sideNav[0].classList.toggle("remove");
+    list[0].classList.toggle("remove");
     btn[0].classList.toggle("btn-danger");
   };
 
@@ -21,7 +23,7 @@ class HideSideNav extends Component {
         style={this.styleBtn}
         className="btn btn-success btn-danger sideBtn"
       >
-        Side Navigation
+        Side Nav
       </button>
     );
   }
