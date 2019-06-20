@@ -1,20 +1,26 @@
 import React, { Component } from "react";
 import ListItem from "./ListItem";
+import { VIEW } from "../Constants";
 
 class List extends Component {
   //To contain list items
   render() {
-    const { items, toggle, onDelete, saveEdit, colors } = this.props;
+    const { currentView, items, onDelete, saveEdit, toggle } = this.props;
+
+    let className = "list"; //Rerendering will cause it to always start from here, there is no need to remove the className.
+    if (currentView === VIEW.BLOCK) {
+      className += " listgrid";
+    }
     return (
-      <div className="list listgrid">
+      <div className={className}>
         {items.map(item => (
           <ListItem
-            key={item.id}
+            currentView={currentView}
             item={item}
-            toggle={toggle}
+            key={item.id}
             onDelete={onDelete}
             saveEdit={saveEdit}
-            colors={colors}
+            toggle={toggle}
           />
         ))}
       </div>

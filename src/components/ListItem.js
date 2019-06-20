@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ContentEditable from "react-contenteditable";
+import { CATEGORIES, PRIORITY_LEVEL, VIEW } from "../Constants";
 
 class ListItem extends Component {
-  // const {item, toggle, onDelete, saveEdit, colors} = this.props;
-
+  //for completed todo items
   toggle = () => {
     return {
       textDecoration: this.props.item.completed ? "line-through" : "none",
@@ -32,41 +32,47 @@ class ListItem extends Component {
 
   //Dynamically choose bg color based on category
   chooseCat = () => {
-    const { colors, item } = this.props;
-    const itemColor = colors.filter(color => color.name === item.category)[0]
-      .color;
+    const { item } = this.props;
+    const itemColor = CATEGORIES[item.categoryIndex].color;
     const filter = item.display;
+
     return { background: itemColor, display: filter };
   };
 
   //Choose Icon
   chooseIcon = () => {
-    const { colors, item } = this.props;
-    return colors.filter(color => color.name === item.category)[0].icon;
+    const { item } = this.props;
+    const itemIcon = CATEGORIES[item.categoryIndex].icon;
+    return itemIcon;
   };
 
   //Color Styling for priority Icon
   priorityStyle = () => {
+    const { item } = this.props;
     return {
-      color: this.props.item.priorityColor,
+      color: PRIORITY_LEVEL[item.priorityIndex].color,
       fontSize: "2rem",
       marginLeft: "0.5rem"
     };
   };
 
+  toggleView() {}
+
   //Create list items
   render() {
     const {
+      currentView,
       item: { id, title },
-      toggle,
       onDelete,
-      saveEdit
+      saveEdit,
+      toggle
     } = this.props;
+
+    let className =
+      "listitem text-light p-3 clearfix rounded align-items-center";
+    if (currentView === VIEW.BLOCK) className += " listitemgrid";
     return (
-      <div
-        style={this.chooseCat()}
-        className="listitem listitemgrid text-light p-3 clearfix rounded align-items-center"
-      >
+      <div style={this.chooseCat()} className={className}>
         <span
           style={{ fontSize: "2.5rem", color: "#555", width: "50px" }}
           className={this.chooseIcon()}

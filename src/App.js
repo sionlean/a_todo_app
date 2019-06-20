@@ -2,115 +2,30 @@ import React, { Component } from "react";
 import List from "./components/List";
 import Navbar from "./components/Navbar";
 import SideNav from "./components/SideNav";
-import uuid from "uuid";
 import "./App.css";
+import CreateListItem from "./CreateListItem";
+import {
+  CATEGORY_INDEX,
+  PRIORITY_INDEX,
+  CATEGORY_ALL,
+  VIEW,
+  THEME
+} from "./Constants";
+
+const DEFAULT_ITEM = new CreateListItem(
+  "hi",
+  CATEGORY_INDEX.FAMILY,
+  PRIORITY_INDEX.LOW
+);
+const DEFAULT_STATE = {
+  items: [DEFAULT_ITEM],
+  filter: CATEGORY_ALL,
+  currentView: VIEW.LIST,
+  currentTheme: THEME.LIGHT
+};
 
 class App extends Component {
-  state = {
-    items: [
-      {
-        id: uuid.v4(),
-        title: "Hi, Welcome to my very first React Application: A To-Do List",
-        completed: false,
-        category: "Family",
-        display: "flex",
-        priorityColor: "rgba(255, 255, 255, 0)"
-      },
-      {
-        id: uuid.v4(),
-        title:
-          "You can type in the input box above and set the category and priority level. If you want to, you can reset all contents by clicking 'reset'",
-        completed: false,
-        category: "Friends",
-        display: "flex",
-        priorityColor: "#fdfd96"
-      },
-      {
-        id: uuid.v4(),
-        title:
-          "On my left, you can toggle a simple night/day theme and switch between a block/list layout",
-        completed: false,
-        category: "Work",
-        display: "flex",
-        priorityColor: "#fdfd96"
-      },
-      {
-        id: uuid.v4(),
-        title:
-          "Furthermore, I can keep track of the number of items by category and also clear all completd items with a click",
-        completed: false,
-        category: "Work",
-        display: "flex",
-        priorityColor: "#fdfd96"
-      },
-      {
-        id: uuid.v4(),
-        title:
-          "For your convenience, there is filter function for filtering out the differnet category",
-        completed: false,
-        category: "Work",
-        display: "flex",
-        priorityColor: "#ff6961"
-      },
-      {
-        id: uuid.v4(),
-        title: "You can set an alert with a note within the timespan of 1 day",
-        completed: false,
-        category: "Work",
-        display: "flex",
-        priorityColor: "rgba(255, 255, 255, 0)"
-      },
-      {
-        id: uuid.v4(),
-        title:
-          "You can click on me to edit the content or remove me by using the bin icon.",
-        completed: false,
-        category: "Others",
-        display: "flex",
-        priorityColor: "#fdfd96"
-      },
-      {
-        id: uuid.v4(),
-        title:
-          "A yellow exclaimation mark signify mid-priority while a red signify high priority",
-        completed: false,
-        category: "Others",
-        display: "flex",
-        priorityColor: "rgba(255, 255, 255, 0)"
-      },
-      {
-        id: uuid.v4(),
-        title:
-          "I am categorised based on either: family, friends, work or others. Each have it's own icon and colors",
-        completed: false,
-        category: "Others",
-        display: "flex",
-        priorityColor: "#ff6961"
-      },
-      {
-        id: uuid.v4(),
-        title:
-          "Wow. You must be bored now. If you have read everything, feel free to click the reset button and start exploring. Thank You :) ",
-        completed: false,
-        category: "Others",
-        display: "flex",
-        priorityColor: "rgba(255, 255, 255, 0)"
-      }
-    ],
-    colors: [
-      { name: "Family", color: "#4D6D9A", icon: "fa fa-home" },
-      { name: "Friends", color: "#86B3D1", icon: "fa fa-users" },
-      { name: "Work", color: "#99CED3", icon: "fa fa-briefcase" },
-      { name: "Others", color: "#EDB5BF", icon: "fa fa-archive" }
-    ],
-    curCat: "Others",
-    curPri: "rgba(255, 255, 255, 0.0)",
-    priority: [
-      { name: "Low Priority", color: "rgba(255, 255, 255, 0.0)" },
-      { name: "Mid Priority", color: "#fdfd96" },
-      { name: "High Priority", color: "#ff6961" }
-    ]
-  };
+  state = this.getStateFromLocalStorage(); // Act like a constructor so it will construct with the right state alr
 
   //Strike through when completed
   toggle = id => {
@@ -126,29 +41,18 @@ class App extends Component {
 
   //Remove individual listitems
   onDelete = id => {
+    const updatedList = this.state.items.filter(item => item.id !== id);
     this.setState({
-      items: [...this.state.items.filter(item => item.id !== id)] //Spread operator
+      items: updatedList
     });
   };
 
-  //Update Category
-  curCat = cat => {
-    this.setState({ curCat: cat });
-  };
-
   //Add list items
-  addList = title => {
-    const newItem = {
-      id: uuid.v4(),
-      title: title,
-      completed: false,
-      category: this.state.curCat,
-      display: "flex",
-      priorityColor: this.state.curPri
-    };
-    this.filterOff();
-    this.listView();
-    this.setState({ items: [...this.state.items, newItem] });
+  addList = (title, categoryIndex, priorityIndex) => {
+    const item = new CreateListItem(title, categoryIndex, priorityIndex);
+    const list = [...this.state.items, item];
+    // this.listView();
+    this.setState({ items: list });
   };
 
   //Reset list items
@@ -171,40 +75,8 @@ class App extends Component {
   };
 
   // Filter Category
-  filter = cat => {
-    if (cat === "All") {
-      this.filterOff();
-    } else {
-      this.setState({
-        items: this.state.items.map(item => {
-          return (item.display = "flex"); //remove return
-        })
-      });
-      this.setState({
-        items: this.state.items.map(item => {
-          if (item.category !== cat) {
-            item.display = "none";
-          }
-          return item;
-        })
-      });
-    }
-  };
-
-  //Off Filter
-  filterOff = () => {
-    this.setState({
-      items: this.state.items.map(item => {
-        item.display = "flex";
-        return item;
-      })
-    });
-  };
-
-  //setting priority color to state
-  handlePriority = pri => {
-    const colorState = this.state.priority.filter(name => name.name === pri);
-    this.setState({ curPri: colorState[0].color });
+  filter = categoryIndex => {
+    this.setState({ filter: categoryIndex }); //Async, use callback function to run save the changed state to memory.
   };
 
   // Setting timer
@@ -215,67 +87,119 @@ class App extends Component {
     }, time);
   };
 
-  // setting themes and layout
-  darkTheme = () => {
-    let body = document.getElementsByTagName("body")[0];
-    body.classList.add("dark");
+  toggleView = () => {
+    let newView = this.state.currentView === VIEW.LIST ? VIEW.BLOCK : VIEW.LIST;
+    this.setState({ currentView: newView }, this.changeTheme);
   };
 
-  lightTheme = () => {
-    let body = document.getElementsByTagName("body")[0];
-    body.classList.remove("dark");
+  toggleTheme = () => {
+    let newTheme =
+      this.state.currentTheme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT;
+    this.setState({ currentTheme: newTheme }, this.changeTheme);
   };
 
-  blockView = () => {
-    let list = document.getElementsByClassName("list");
-    let listitem = document.getElementsByClassName("listitem");
-
-    list[0].classList.add("listgrid");
-    for (let i = 0; i < listitem.length; i++) {
-      listitem[i].classList.add("listitemgrid");
+  changeTheme = () => {
+    let body = document.getElementsByTagName("body")[0];
+    if (this.state.currentTheme === THEME.DARK) {
+      body.classList.add(THEME.DARK);
+    } else {
+      body.classList.remove(THEME.DARK);
     }
   };
 
-  listView = () => {
-    let list = document.getElementsByClassName("list");
-    let listitem = document.getElementsByClassName("listitem");
+  //Loading local Storage
+  getFromLocalStorage() {
+    // SOLUTION 1
+    // Object.keys(DEFAULT_STATE).forEach(stateKey => {
+    //   let value = localStorage.getItem(stateKey);
+    //   if (isNaN(+value)) {
+    //     // if is a string number --> (+value) become a number --> isNaN(+value) will return a false
+    //     // if is a string --> (+value) become a NaN --> isNaN(+value) will return a true, entering try-catch
+    //     try {
+    //       value = JSON.parse(value); //JSON.parse(if is not a JSON format, will return error)
+    //     } catch {}
+    //   }
+    //   this.setState({
+    //     [stateKey]: value || DEFAULT_STATE[stateKey]
+    //   });
+    // });
 
-    list[0].classList.remove("listgrid");
-    for (let i = 0; i < listitem.length; i++) {
-      listitem[i].classList.remove("listitemgrid");
+    const state = DEFAULT_STATE;
+    Object.keys(DEFAULT_STATE).forEach(stateKey => {
+      let value = localStorage.getItem(stateKey);
+      if (isNaN(+value)) {
+        // if is a string number --> (+value) become a number --> isNaN(+value) will return a false
+        // if is a string --> (+value) become a NaN --> isNaN(+value) will return a true, entering try-catch
+        try {
+          value = JSON.parse(value); //JSON.parse(if is not a JSON format, will return error)
+        } catch {}
+      }
+
+      state[stateKey] = value || state[stateKey];
+    });
+    this.setState(state);
+  }
+
+  getStateFromLocalStorage() {
+    const state = DEFAULT_STATE;
+    Object.keys(DEFAULT_STATE).forEach(stateKey => {
+      let value = localStorage.getItem(stateKey);
+      if (isNaN(+value)) {
+        // if is a string number --> (+value) become a number --> isNaN(+value) will return a false
+        // if is a string --> (+value) become a NaN --> isNaN(+value) will return a true, entering try-catch
+        try {
+          value = JSON.parse(value); //JSON.parse(if is not a JSON format, will return error)
+        } catch {}
+      }
+
+      state[stateKey] = value || state[stateKey];
+    });
+    return state;
+  }
+
+  componentDidMount() {
+    // this.getFromLocalStorage();
+    this.changeTheme();
+  }
+
+  //Update the local storage when there is a change in the state
+  componentDidUpdate(prevProps, prevState) {
+    //Might need to add prevProps
+    for (let key of Object.keys(DEFAULT_STATE)) {
+      let value = this.state[key];
+      value = typeof value !== "string" ? JSON.stringify(value) : value;
+      if (prevState[key] !== value) {
+        localStorage.setItem(key, value);
+      }
     }
-  };
+  }
 
   render() {
+    const { filter, items } = this.state;
+    let filteredItems = items;
+    if (filter !== CATEGORY_ALL) {
+      filteredItems = items.filter(item => item.categoryIndex === filter); // return selected category
+    }
     return (
       <div className="App">
-        <Navbar
-          addList={this.addList}
-          onReset={this.onReset}
-          colors={this.state.colors}
-          curCat={this.curCat}
-          priority={this.state.priority}
-          handlePriority={this.handlePriority}
-        />
+        <Navbar addList={this.addList} onReset={this.onReset} />
         <div className="blank" />
         <div className="flex">
           <SideNav
-            items={this.state.items}
-            colors={this.state.colors}
+            currentFilter={this.state.filter}
             clearCompleted={this.clearCompleted}
+            toggleView={this.toggleView}
+            toggleTheme={this.toggleTheme}
             filter={this.filter}
+            items={this.state.items}
             timer={this.timer}
-            darkTheme={this.darkTheme}
-            lightTheme={this.lightTheme}
-            blockView={this.blockView}
-            listView={this.listView}
           />
           <List
-            items={this.state.items}
-            toggle={this.toggle}
+            currentView={this.state.currentView}
+            items={filteredItems}
             onDelete={this.onDelete}
             saveEdit={this.saveEdit}
-            colors={this.state.colors}
+            toggle={this.toggle}
           />
         </div>
       </div>

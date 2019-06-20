@@ -9,14 +9,7 @@ class Navbar extends Component {
   state = {};
 
   render() {
-    const {
-      addList,
-      colors,
-      curCat,
-      priority,
-      handlePriority,
-      onReset
-    } = this.props;
+    const { addList, onReset } = this.props;
     return (
       <div className="header">
         <nav className="navbar navbar-inverse">
@@ -33,13 +26,7 @@ class Navbar extends Component {
             </div>
           </div>
         </nav>
-        <UserInput
-          addList={addList}
-          colors={colors}
-          curCat={curCat}
-          priority={priority}
-          handlePriority={handlePriority}
-        />
+        <UserInput addList={addList} />
       </div>
     );
   }

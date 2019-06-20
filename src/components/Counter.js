@@ -1,32 +1,25 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  state = {};
-
   btnStyle = () => {
-    const { color } = this.props;
+    const { category } = this.props;
     return {
-      backgroundColor: color.color,
+      backgroundColor: category.color,
       width: "80%",
       fontWeight: "bold"
     };
   };
 
-  counters = () => {
-    const { items, color } = this.props;
-    return items.filter(item => item.category === color.name).length;
-  };
-
   render() {
-    const { color } = this.props;
+    const { category, count } = this.props;
     return (
       <div>
         <button type="button" className="btn btn-basic" style={this.btnStyle()}>
           <span
             style={{ fontSize: "1.5rem", color: "#555", float: "left" }}
-            className={color.icon}
+            className={category.icon}
           />
-          {color.name}
+          {category.name}
 
           <span
             style={{
@@ -36,7 +29,7 @@ class Counter extends Component {
             }}
             className="badge"
           >
-            {this.counters()}
+            {count}
           </span>
         </button>
       </div>

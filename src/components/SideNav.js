@@ -8,32 +8,24 @@ class SideNav extends Component {
 
   render() {
     const {
-      lightTheme,
-      darkTheme,
-      blockView,
-      listView,
+      toggleView,
+      toggleTheme,
       clearCompleted,
-      colors,
       items,
       filter,
-      timer
+      timer,
+      currentFilter
     } = this.props;
     return (
       <div className="sidenav">
         <div className="toggleView">
           <p>Toggle View</p>
-          <span onClick={lightTheme} className="fa fa-sun-o" />
-          <span onClick={darkTheme} className="fa fa-moon-o" />
+          <span onClick={toggleTheme} className="fa fa-sun-o" />
           <p className="sep"> | </p>
-          <span onClick={blockView} className="fa fa-th" />
-          <span onClick={listView} className="fa fa-list" />
+          <span onClick={toggleView} className="fa fa-list" />
         </div>
-        <CounterList
-          items={items}
-          colors={colors}
-          clearCompleted={clearCompleted}
-        />
-        <Filter colors={colors} items={items} filter={filter} />
+        <CounterList items={items} clearCompleted={clearCompleted} />
+        <Filter items={items} filter={filter} currentFilter={currentFilter} />
         <Timer timer={timer} />
       </div>
     );

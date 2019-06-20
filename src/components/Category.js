@@ -1,36 +1,31 @@
 import React, { Component } from "react";
+import { CATEGORIES, CATEGORY_INDEX } from "../Constants";
 
 class Category extends Component {
-  state = {
-    curCat: "Others"
-  };
-
   select = color => {
     return color.name === "Others" ? "selected" : "";
   };
 
-  handleChange = e => {
-    const { curCat } = this.props;
-    const cat = e.target.value;
-    curCat(cat);
-    this.setState({ curCat: e.target.value });
+  onChange = e => {
+    const value = e.target.value;
+    this.props.updateCategory(value);
   };
 
   render() {
-    const { colors } = this.props;
+    const { categoryIndex } = this.props;
     return (
       <select
         className="selector selectpicker p-1 form-control"
-        value={this.state.curCat}
-        onChange={this.handleChange}
+        value={categoryIndex}
+        onChange={this.onChange}
       >
-        {colors.map(color => (
+        {Object.values(CATEGORY_INDEX).map(index => (
           <option
-            key={color.name}
-            value={color.name}
-            style={{ background: color.color }}
+            key={index}
+            value={index} //Different from the name of the dropdown box
+            style={{ background: CATEGORIES[index].color }}
           >
-            {color.name}
+            {CATEGORIES[index].name}
           </option>
         ))}
       </select>

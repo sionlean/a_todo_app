@@ -5,15 +5,15 @@ class Filter extends Component {
   state = {};
 
   render() {
-    const { colors, filter } = this.props;
+    const { filter, currentFilter } = this.props;
     return (
       <div className="filter">
         <p>Filter</p>
         <div>
           <FilterList
             style={{ width: "50%" }}
-            colors={colors}
-            curCat={filter}
+            filter={filter}
+            currentFilter={currentFilter}
           />
         </div>
       </div>

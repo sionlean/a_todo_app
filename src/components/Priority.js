@@ -1,30 +1,30 @@
 import React, { Component } from "react";
+import { PRIORITY_INDEX, PRIORITY_LEVEL } from "../Constants";
 
 class Priority extends Component {
-  state = {
-    priority: "Low Priority"
-  };
-
-  handleChange = e => {
-    this.setState({ priority: e.target.value });
-    this.props.handlePriority(e.target.value);
+  onChange = e => {
+    const value = e.target.value;
+    this.props.updatePriority(value);
   };
 
   render() {
-    const { priority } = this.props;
+    const { priorityIndex } = this.props;
     return (
       <select
         className="selector selectpicker p-1 form-control"
-        onChange={this.handleChange}
-        value={this.state.priority}
+        onChange={this.onChange}
+        value={priorityIndex}
       >
-        {priority.map(pri => (
+        {Object.values(PRIORITY_INDEX).map(index => (
           <option
-            key={pri.name}
-            value={pri.name}
-            style={{ color: "black", backgroundColor: pri.color }}
+            key={index}
+            value={index}
+            style={{
+              color: "black",
+              backgroundColor: PRIORITY_LEVEL[index].color
+            }}
           >
-            {pri.name}
+            {PRIORITY_LEVEL[index].name}
           </option>
         ))}
       </select>

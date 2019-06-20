@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { CATEGORIES, CATEGORY_INDEX, CATEGORY_ALL } from "../Constants";
 
 class FilterList extends Component {
   state = {
-    curCat: "All"
+    currentCategory: CATEGORY_ALL
   };
 
   select = color => {
@@ -10,31 +11,31 @@ class FilterList extends Component {
   };
 
   handleChange = e => {
-    const { curCat } = this.props;
-    const cat = e.target.value;
-    curCat(cat);
-    this.setState({ curCat: e.target.value });
+    const { filter } = this.props; //Filter : the chosen filter item will be bubbled up to App.js using filter function
+    const categoryIndex = e.target.value;
+    filter(categoryIndex); // Value brought up
+    this.setState({ currentCategory: e.target.value });
   };
 
   render() {
-    const { colors } = this.props;
+    const { currentFilter } = this.props; // currentFilter : From App.js state propagate down
     return (
       <select
         className="selector selectpicker p-1 form-control"
-        value={this.state.curCat}
+        value={currentFilter}
         onChange={this.handleChange}
       >
-        {colors.map(color => (
+        {Object.values(CATEGORY_INDEX).map(index => (
           <option
-            key={color.name}
-            value={color.name}
-            style={{ background: color.color }}
+            key={index}
+            value={index}
+            style={{ background: CATEGORIES[index].color }}
           >
-            {color.name}
+            {CATEGORIES[index].name}
           </option>
         ))}
-        <option value="All" style={{ background: "#999" }}>
-          All{" "}
+        <option value={CATEGORY_ALL} style={{ background: "#999" }}>
+          All
         </option>
       </select>
     );
