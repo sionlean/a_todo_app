@@ -55,8 +55,3 @@ export const THEME = {
   LIGHT: "light",
   DARK: "dark"
 };
-
-// export const VIEW_STYLE_CLASS = { //Usecase will only be once, not needed
-//   [VIEW.BLOCK]: "viewBlock",
-//   [VIEW.LIST]: "viewList"
-// };

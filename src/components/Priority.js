@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { PRIORITY_INDEX, PRIORITY_LEVEL } from "../Constants";
+import { connect } from "react-redux";
+import { updatePriorityIndex } from "../actions";
 
 class Priority extends Component {
   onChange = e => {
+    const { updatePriorityIndex } = this.props;
     const value = e.target.value;
-    this.props.updatePriority(value);
+    updatePriorityIndex(value);
   };
 
   render() {
@@ -32,4 +35,16 @@ class Priority extends Component {
   }
 }
 
-export default Priority;
+const mapStateToProps = state => ({
+  priorityIndex: state.updatePriorityIndex
+});
+
+const mapDispatchToProps = dispatch => ({
+  updatePriorityIndex: priorityIndex =>
+    dispatch(updatePriorityIndex(priorityIndex))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Priority);

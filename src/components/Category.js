@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { CATEGORIES, CATEGORY_INDEX } from "../Constants";
+import { updateCategoryIndex } from "../actions";
+import { connect } from "react-redux";
 
 class Category extends Component {
   select = color => {
@@ -7,8 +9,9 @@ class Category extends Component {
   };
 
   onChange = e => {
+    const { updateCategoryIndex } = this.props;
     const value = e.target.value;
-    this.props.updateCategory(value);
+    updateCategoryIndex(value);
   };
 
   render() {
@@ -33,4 +36,16 @@ class Category extends Component {
   }
 }
 
-export default Category;
+const mapStateToProps = state => ({
+  categoryIndex: state.updateCategoryIndex
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateCategoryIndex: categoryIndex =>
+    dispatch(updateCategoryIndex(categoryIndex))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Category);

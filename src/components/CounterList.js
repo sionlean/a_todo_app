@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Counter from "./Counter";
 import ClearCompleted from "./ClearCompleted";
 import { CATEGORIES, CATEGORY_INDEX } from "../Constants";
 
 class CounterList extends Component {
-  state = {};
-
   render() {
-    const { items, clearCompleted } = this.props;
+    const { items } = this.props;
     return (
       <div className="counterList">
         <p> Counters </p>
@@ -22,10 +21,14 @@ class CounterList extends Component {
           })}
         </div>
         <br />
-        <ClearCompleted clearCompleted={clearCompleted} />
+        <ClearCompleted />
       </div>
     );
   }
 }
 
-export default CounterList;
+const mapStateToProps = state => ({
+  items: state.items
+});
+
+export default connect(mapStateToProps)(CounterList);

@@ -1,24 +1,30 @@
+import { connect } from "react-redux";
 import React, { Component } from "react";
 import { CATEGORIES, CATEGORY_INDEX, CATEGORY_ALL } from "../Constants";
+import { filterUpdate } from "../actions";
+
+const mapStateToProps = state => ({
+  //Naming does not matter, store contains all the state.
+  currentFilter: state.filterCategory //This is gotten from the state through connect(), no link to reducers
+});
+
+const mapDispatchToProps = dispatch => ({
+  filterUpdate: categoryIndex => dispatch(filterUpdate(categoryIndex))
+});
 
 class FilterList extends Component {
-  state = {
-    currentCategory: CATEGORY_ALL
-  };
-
   select = color => {
     return color.name === "Others" ? "selected" : "";
   };
 
   handleChange = e => {
-    const { filter } = this.props; //Filter : the chosen filter item will be bubbled up to App.js using filter function
+    const { filterUpdate } = this.props;
     const categoryIndex = e.target.value;
-    filter(categoryIndex); // Value brought up
-    this.setState({ currentCategory: e.target.value });
+    filterUpdate(categoryIndex);
   };
 
   render() {
-    const { currentFilter } = this.props; // currentFilter : From App.js state propagate down
+    const { currentFilter } = this.props; // currentFilter from mapStateToProps
     return (
       <select
         className="selector selectpicker p-1 form-control"
@@ -42,4 +48,7 @@ class FilterList extends Component {
   }
 }
 
-export default FilterList;
+export default connect(
+  mapStateToProps, //return state
+  mapDispatchToProps //return action
+)(FilterList); // Will return a prop with the state and methods from mapDispatchToprops

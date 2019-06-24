@@ -15,10 +15,13 @@ class ListItem extends Component {
     };
   };
 
-  saveEdit = e => {
-    const { item, saveEdit } = this.props;
-    item.title = e.target.value;
-    saveEdit(item);
+  updateEdit = e => {
+    const {
+      item: { id },
+      editItem
+    } = this.props;
+    let newTitle = e.target.value;
+    editItem(id, newTitle);
   };
 
   //Bin Icom Styling
@@ -56,18 +59,14 @@ class ListItem extends Component {
     };
   };
 
-  toggleView() {}
-
   //Create list items
   render() {
     const {
       currentView,
       item: { id, title },
-      onDelete,
-      saveEdit,
-      toggle
+      deleteItem,
+      toggleItem
     } = this.props;
-
     let className =
       "listitem text-light p-3 clearfix rounded align-items-center";
     if (currentView === VIEW.BLOCK) className += " listitemgrid";
@@ -85,13 +84,13 @@ class ListItem extends Component {
           className="align-middle"
           style={{ flex: 1, width: 30, height: 30 }}
           type="checkbox"
-          onChange={toggle.bind(this, id)}
+          onChange={toggleItem.bind(this, id)}
         />
         <label style={this.toggle()}>
-          <ContentEditable html={title} onChange={saveEdit} />
+          <ContentEditable html={title} onChange={this.updateEdit} />
         </label>
         <span
-          onClick={onDelete.bind(this, id)}
+          onClick={deleteItem.bind(this, id)} //
           className="fa fa-trash"
           style={this.binStyle}
         >

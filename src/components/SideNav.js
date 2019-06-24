@@ -1,35 +1,36 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import CounterList from "./CounterList";
 import Filter from "./Filter";
 import Timer from "./Timer";
+import { updateView, updateTheme } from "../actions";
 
 class SideNav extends Component {
-  state = {};
-
   render() {
-    const {
-      toggleView,
-      toggleTheme,
-      clearCompleted,
-      items,
-      filter,
-      timer,
-      currentFilter
-    } = this.props;
+    const { updateTheme, updateView } = this.props;
     return (
       <div className="sidenav">
         <div className="toggleView">
           <p>Toggle View</p>
-          <span onClick={toggleTheme} className="fa fa-sun-o" />
+          <span onClick={updateTheme} className="fa fa-sun-o" />
           <p className="sep"> | </p>
-          <span onClick={toggleView} className="fa fa-list" />
+          <span onClick={updateView} className="fa fa-list" />
         </div>
-        <CounterList items={items} clearCompleted={clearCompleted} />
-        <Filter items={items} filter={filter} currentFilter={currentFilter} />
-        <Timer timer={timer} />
+        <CounterList />
+        <Filter />
+        <Timer />
       </div>
     );
   }
 }
+const mapStateToProps = state => ({});
 
-export default SideNav;
+const mapDispatchToProps = dispatch => ({
+  updateView: () => dispatch(updateView()),
+  updateTheme: () => dispatch(updateTheme()) //Will loop through all the reducer function? including item,...filterCategory,...
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SideNav);

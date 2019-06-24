@@ -1,6 +1,6 @@
 import uuid from "uuid";
 
-class CreateListItem {
+export class CreateListItem {
   constructor(title, categoryIndex, priorityIndex) {
     this.id = uuid.v4();
     this.title = title;
@@ -10,4 +10,10 @@ class CreateListItem {
   }
 }
 
-export default CreateListItem;
+export class CreateDefaultTime {
+  constructor(hour, min, text) {
+    this.hour = hour;
+    this.min = min;
+    this.text = text;
+  }
+}

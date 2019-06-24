@@ -1,24 +1,22 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addItem, updateTitle } from "../actions";
 import Category from "./Category";
 import Priority from "./Priority";
 import InputTask from "./InputTask";
 
 class UserInput extends Component {
-  state = {
-    title: "",
-    categoryIndex: "3",
-    priorityIndex: "0"
-  };
-
   onSubmit = e => {
     e.preventDefault();
-    const { categoryIndex, priorityIndex, title } = this.state;
-    this.props.addList(title, categoryIndex, priorityIndex);
-    this.setState({ title: "" });
-  };
-
-  updateState = (key, value) => {
-    this.setState({ [key]: value });
+    const {
+      categoryIndex,
+      priorityIndex,
+      title,
+      updateTitle,
+      addItem
+    } = this.props;
+    addItem(title, categoryIndex, priorityIndex);
+    updateTitle("");
   };
 
   render() {
@@ -28,22 +26,28 @@ class UserInput extends Component {
         onSubmit={this.onSubmit}
         style={{ display: "flex", padding: "10px" }}
       >
-        <InputTask
-          title={this.state.title}
-          updateTitle={this.updateState.bind(this, "title")}
-        />
-        <Category
-          categoryIndex={this.state.categoryIndex}
-          updateCategory={this.updateState.bind(this, "categoryIndex")} // Understand Binding
-        />
-        <Priority
-          priorityIndex={this.state.priorityIndex}
-          updatePriority={this.updateState.bind(this, "priorityIndex")}
-        />
+        <InputTask />
+        <Category />
+        <Priority />
         <input style={{ flex: 1 }} className="btn submit" type="submit" />
       </form>
     );
   }
 }
 
-export default UserInput;
+const mapStateToProps = state => ({
+  title: state.updateTitle,
+  categoryIndex: state.updateCategoryIndex,
+  priorityIndex: state.updatePriorityIndex
+});
+
+const mapDispatchToProps = dispatch => ({
+  addItem: (title, categoryIndex, priorityIndex) =>
+    dispatch(addItem(title, categoryIndex, priorityIndex)),
+  updateTitle: title => dispatch(updateTitle(title))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserInput);

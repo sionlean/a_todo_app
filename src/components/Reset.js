@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { resetItem } from "../actions";
 
 class Reset extends Component {
-  state = {};
   render() {
-    const { onReset } = this.props;
+    const { resetItem } = this.props;
     return (
       <button
-        onClick={onReset}
+        onClick={resetItem}
         style={{ border: "none", color: "white" }}
         className="btn navbar-btn reset"
       >
@@ -15,5 +16,13 @@ class Reset extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  resetItem: () => dispatch(resetItem())
+});
 
-export default Reset;
+const mapStateToProps = state => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Reset);

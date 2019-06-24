@@ -6,10 +6,7 @@ import Reset from "./Reset";
 import logo from "../logo.svg";
 
 class Navbar extends Component {
-  state = {};
-
   render() {
-    const { addList, onReset } = this.props;
     return (
       <div className="header">
         <nav className="navbar navbar-inverse">
@@ -22,11 +19,11 @@ class Navbar extends Component {
               <p className="navbar-brand">
                 To-Do List <HideUserInput />
               </p>
-              <Reset onReset={onReset} />
+              <Reset />
             </div>
           </div>
         </nav>
-        <UserInput addList={addList} />
+        <UserInput />
       </div>
     );
   }
