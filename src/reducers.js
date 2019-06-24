@@ -80,7 +80,7 @@ const filterCategory = (state = CATEGORY_ALL, action) => {
   }
 };
 
-const toggleView = (state = VIEW.LIST, action) => {
+const updateView = (state = VIEW.LIST, action) => {
   switch (action.type) {
     case ACTION_VIEW_TOGGLE:
       let newView = state === VIEW.LIST ? VIEW.BLOCK : VIEW.LIST;
@@ -90,23 +90,12 @@ const toggleView = (state = VIEW.LIST, action) => {
   }
 };
 
-const toggleTheme = (state = THEME.LIGHT, action) => {
+const updateTheme = (state = THEME.LIGHT, action) => {
   switch (action.type) {
     case ACTION_THEME_TOGGLE:
-      let newTheme = state === THEME.LIGHT ? THEME.DARK : THEME.LIGHT;
-      updateDOM(newTheme);
-      return newTheme;
+      return state === THEME.LIGHT ? THEME.DARK : THEME.LIGHT;
     default:
       return state;
-  }
-};
-// Can do this in the reducers page?
-const updateDOM = newTheme => {
-  let body = document.getElementsByTagName("body")[0];
-  if (newTheme === THEME.DARK) {
-    body.classList.add(THEME.DARK);
-  } else {
-    body.classList.remove(THEME.DARK);
   }
 };
 
@@ -172,8 +161,8 @@ const updatePriorityIndex = (state = "0", action) => {
 export default combineReducers({
   items,
   filterCategory,
-  toggleView,
-  toggleTheme,
+  updateView,
+  updateTheme,
   setTimer,
   updateTitle,
   updateCategoryIndex,

@@ -23,11 +23,12 @@ class SideNav extends Component {
     );
   }
 }
+
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
   updateView: () => dispatch(updateView()),
-  updateTheme: () => dispatch(updateTheme()) //Will loop through all the reducer function? including item,...filterCategory,...
+  updateTheme: () => dispatch(updateTheme())
 });
 
 export default connect(

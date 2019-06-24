@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
 class HideSideNav extends Component {
-  state = {};
-
   addShow = () => {
     const sideNav = document.getElementsByClassName("sidenav");
     const btn = document.getElementsByClassName("sideBtn");

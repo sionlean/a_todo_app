@@ -40,7 +40,7 @@ const mapStateToProps = state => {
   }
   return {
     items: filteredItems,
-    currentView: state.toggleView
+    currentView: state.updateView
   };
 };
 

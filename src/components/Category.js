@@ -25,7 +25,7 @@ class Category extends Component {
         {Object.values(CATEGORY_INDEX).map(index => (
           <option
             key={index}
-            value={index} //Different from the name of the dropdown box
+            value={index}
             style={{ background: CATEGORIES[index].color }}
           >
             {CATEGORIES[index].name}

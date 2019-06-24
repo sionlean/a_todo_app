@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
 class HideUserInput extends Component {
-  state = {};
-
   toggleInput = () => {
     const form = document.getElementsByClassName("form");
     const btn = document.getElementsByClassName("showInputBtn");

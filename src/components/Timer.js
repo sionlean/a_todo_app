@@ -33,7 +33,7 @@ class Timer extends Component {
             <input
               onChange={this.setHour}
               type="number"
-              value={hour} //controlled input to non-controlled input
+              value={hour}
               min="0"
               step="1"
               max="23"

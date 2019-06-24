@@ -9,7 +9,7 @@ body {
   background-size: cover;
 }
 
-body.dark {
+.dark {
   background-color: #74828a;
 }
 

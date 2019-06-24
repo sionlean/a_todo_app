@@ -4,8 +4,7 @@ import { CATEGORIES, CATEGORY_INDEX, CATEGORY_ALL } from "../Constants";
 import { filterUpdate } from "../actions";
 
 const mapStateToProps = state => ({
-  //Naming does not matter, store contains all the state.
-  currentFilter: state.filterCategory //This is gotten from the state through connect(), no link to reducers
+  currentFilter: state.filterCategory
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -24,7 +23,7 @@ class FilterList extends Component {
   };
 
   render() {
-    const { currentFilter } = this.props; // currentFilter from mapStateToProps
+    const { currentFilter } = this.props;
     return (
       <select
         className="selector selectpicker p-1 form-control"

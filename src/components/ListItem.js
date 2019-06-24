@@ -24,7 +24,7 @@ class ListItem extends Component {
     editItem(id, newTitle);
   };
 
-  //Bin Icom Styling
+  //Bin Icon Styling
   binStyle = {
     float: "right",
     marginRight: "50px",
