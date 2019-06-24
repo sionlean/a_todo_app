@@ -1,19 +1,9 @@
 import React, { Component } from "react";
 import ContentEditable from "react-contenteditable";
 import { CATEGORIES, PRIORITY_LEVEL, VIEW } from "../Constants";
+import { connect } from "react-redux";
 
 class ListItem extends Component {
-  //for completed todo items
-  listItemStyle = () => {
-    return {
-      textDecoration: this.props.item.completed ? "line-through" : "none",
-      margin: 0,
-      fontSize: "1.5rem",
-      color: "black",
-      fontWeight: 400
-    };
-  };
-
   updateEdit = e => {
     const {
       item: { id },
@@ -23,12 +13,42 @@ class ListItem extends Component {
     editItem(id, newTitle);
   };
 
-  //Bin Icon Styling
-  binStyle = {
-    float: "right",
-    color: "#555",
-    cursor: "pointer",
-    fontSize: "2rem"
+  //Stylings//
+  //TextArea Wrapper
+  textAreaWrapperStyle = () => {
+    const { view } = this.props;
+    const style = { flexGrow: 1, textAlign: "left", width: "100%" };
+    if (view === VIEW.BLOCK) {
+      style["order"] = 5;
+    }
+    return style;
+  };
+  //TextArea
+  textAreaStyle = () => {
+    return {
+      textDecoration: this.props.item.completed ? "line-through" : "none",
+      margin: 0,
+      fontSize: "0.9rem",
+      color: "black",
+      fontWeight: 400
+    };
+  };
+
+  //BinIcon Styling
+  binStyle = () => {
+    const { view } = this.props;
+    const style = {
+      float: "right",
+      color: "#555",
+      cursor: "pointer",
+      fontSize: "2rem"
+    };
+    if (view === VIEW.BLOCK) {
+      style["order"] = 4;
+      style["flexGrow"] = 1;
+      style["textAlign"] = "right";
+    }
+    return style;
   };
 
   //Dynamically choose bg color based on category
@@ -62,11 +82,19 @@ class ListItem extends Component {
       deleteItem,
       toggleItem
     } = this.props;
-    let className =
-      "flex listitem text-light p-3 clearfix rounded align-items-center";
+    let className = "flex listitem text-light clearfix rounded";
     if (currentView === VIEW.BLOCK) className += " listitemgrid";
     return (
       <div style={this.chooseCategoryStyle()} className={className}>
+        {/* CHECKBOX */}
+        <div>
+          <input
+            className="align-middle"
+            style={{ flex: 1, height: 30 }}
+            type="checkbox"
+            onChange={toggleItem.bind(this, id)}
+          />
+        </div>
         {/* ICON */}
         <div
           style={{ fontSize: "2rem", color: "#555" }}
@@ -77,18 +105,10 @@ class ListItem extends Component {
           style={this.priorityStyle()}
           className="fa fa-exclamation-circle"
         />
-        {/* CHECKBOX */}
-        <div>
-          <input
-            className="align-middle"
-            style={{ flex: 1, height: 30 }}
-            type="checkbox"
-            onChange={toggleItem.bind(this, id)}
-          />
-        </div>
+
         {/* TEXTFIELD */}
-        <div style={{ flexGrow: 1, textAlign: "left" }}>
-          <label style={this.listItemStyle()}>
+        <div style={this.textAreaWrapperStyle()}>
+          <label style={this.textAreaStyle()}>
             <ContentEditable html={title} onChange={this.updateEdit} />
           </label>
         </div>
@@ -96,7 +116,7 @@ class ListItem extends Component {
         <div
           onClick={deleteItem.bind(this, id)} //
           className="fa fa-trash"
-          style={this.binStyle}
+          style={this.binStyle()}
         >
           {" "}
         </div>
@@ -105,4 +125,8 @@ class ListItem extends Component {
   }
 }
 
-export default ListItem;
+const mapStateToProps = state => ({
+  view: state.updateView
+});
+
+export default connect(mapStateToProps)(ListItem);

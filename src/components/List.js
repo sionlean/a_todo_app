@@ -11,7 +11,7 @@ class List extends Component {
 
     let className = "list"; //Rerendering will cause it to always start from here, there is no need to remove the className.
     if (currentView === VIEW.BLOCK) {
-      className += " listgrid";
+      className += " flexGrid";
     }
     return (
       <div className={className}>
