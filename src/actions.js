@@ -14,6 +14,8 @@ export const ACTION_SET_TIMER_TEXT = "SET_TIMER_TEXT";
 export const ACTION_UPDATE_TITLE = "UPDATE_TITLE";
 export const ACTION_UPDATE_CATEGORY_INDEX = "UPDATE_CATEGORY_INDEX";
 export const ACTION_UPDATE_PRIORITY_INDEX = "UPDATE_PRIORITY_INDEX";
+export const ACTION_UPDATE_USER_INPUT_HIDDEN_STATE =
+  "UPDATE_USER_INPUT_HIDDEN_STATE";
 
 export const filterUpdate = categoryIndex => ({
   type: ACTION_FILTER_UPDATE,
@@ -91,6 +93,10 @@ export const updateTitle = title => ({
   title
 });
 
+export const updateUserInputHiddenState = () => ({
+  type: ACTION_UPDATE_USER_INPUT_HIDDEN_STATE
+});
+
 export const actions = {
   // This is used in conjunction with bindActionCreator
   filterUpdate,
@@ -108,5 +114,6 @@ export const actions = {
   setTimer,
   updateCategoryIndex,
   updatePriorityIndex,
-  updateTitle
+  updateTitle,
+  updateUserInputHiddenState
 };

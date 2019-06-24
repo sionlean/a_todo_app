@@ -4,10 +4,9 @@ import { CATEGORIES, PRIORITY_LEVEL, VIEW } from "../Constants";
 
 class ListItem extends Component {
   //for completed todo items
-  toggle = () => {
+  listItemStyle = () => {
     return {
       textDecoration: this.props.item.completed ? "line-through" : "none",
-      flex: 15,
       margin: 0,
       fontSize: "1.5rem",
       color: "black",
@@ -27,23 +26,20 @@ class ListItem extends Component {
   //Bin Icon Styling
   binStyle = {
     float: "right",
-    marginRight: "50px",
     color: "#555",
     cursor: "pointer",
     fontSize: "2rem"
   };
 
   //Dynamically choose bg color based on category
-  chooseCat = () => {
+  chooseCategoryStyle = () => {
     const { item } = this.props;
     const itemColor = CATEGORIES[item.categoryIndex].color;
-    const filter = item.display;
-
-    return { background: itemColor, display: filter };
+    return { background: itemColor };
   };
 
   //Choose Icon
-  chooseIcon = () => {
+  chooseIconStyle = () => {
     const { item } = this.props;
     const itemIcon = CATEGORIES[item.categoryIndex].icon;
     return itemIcon;
@@ -54,8 +50,7 @@ class ListItem extends Component {
     const { item } = this.props;
     return {
       color: PRIORITY_LEVEL[item.priorityIndex].color,
-      fontSize: "2rem",
-      marginLeft: "0.5rem"
+      fontSize: "1.8rem"
     };
   };
 
@@ -68,34 +63,43 @@ class ListItem extends Component {
       toggleItem
     } = this.props;
     let className =
-      "listitem text-light p-3 clearfix rounded align-items-center";
+      "flex listitem text-light p-3 clearfix rounded align-items-center";
     if (currentView === VIEW.BLOCK) className += " listitemgrid";
     return (
-      <div style={this.chooseCat()} className={className}>
-        <span
-          style={{ fontSize: "2.5rem", color: "#555", width: "50px" }}
-          className={this.chooseIcon()}
+      <div style={this.chooseCategoryStyle()} className={className}>
+        {/* ICON */}
+        <div
+          style={{ fontSize: "2rem", color: "#555" }}
+          className={this.chooseIconStyle()}
         />
-        <span
+        {/* PRIORITY */}
+        <div
           style={this.priorityStyle()}
           className="fa fa-exclamation-circle"
         />
-        <input
-          className="align-middle"
-          style={{ flex: 1, width: 30, height: 30 }}
-          type="checkbox"
-          onChange={toggleItem.bind(this, id)}
-        />
-        <label style={this.toggle()}>
-          <ContentEditable html={title} onChange={this.updateEdit} />
-        </label>
-        <span
+        {/* CHECKBOX */}
+        <div>
+          <input
+            className="align-middle"
+            style={{ flex: 1, height: 30 }}
+            type="checkbox"
+            onChange={toggleItem.bind(this, id)}
+          />
+        </div>
+        {/* TEXTFIELD */}
+        <div style={{ flexGrow: 1, textAlign: "left" }}>
+          <label style={this.listItemStyle()}>
+            <ContentEditable html={title} onChange={this.updateEdit} />
+          </label>
+        </div>
+        {/* BINICON */}
+        <div
           onClick={deleteItem.bind(this, id)} //
           className="fa fa-trash"
           style={this.binStyle}
         >
           {" "}
-        </span>
+        </div>
       </div>
     );
   }

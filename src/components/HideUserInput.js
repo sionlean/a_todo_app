@@ -1,30 +1,32 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { updateUserInputHiddenState } from "../actions";
 
 class HideUserInput extends Component {
-  toggleInput = () => {
-    const form = document.getElementsByClassName("form");
-    const btn = document.getElementsByClassName("showInputBtn");
-    const flex = document.getElementsByClassName("flex");
-    const btnState = btn[0].classList.contains("fa-plus");
-    form[0].classList.toggle("hide");
-    flex[0].classList.toggle("hide");
-    if (btnState) {
-      btn[0].classList.replace("fa-plus", "fa-minus");
-    } else {
-      btn[0].classList.replace("fa-minus", "fa-plus");
-    }
-  };
-
   render() {
+    const { userInputHiddenState, updateUserInputHiddenState } = this.props;
+    let className = "fa showInputBtn fa-";
+    userInputHiddenState ? (className += "minus") : (className += "plus");
     return (
       <button
-        onClick={this.toggleInput}
+        onClick={updateUserInputHiddenState}
         className="btn btn-dark btn-md showInput"
       >
-        <span className="fa showInputBtn fa-minus" />
+        <span className={className} />
       </button>
     );
   }
 }
 
-export default HideUserInput;
+const mapStateToProps = state => ({
+  userInputHiddenState: state.updateUserInputHiddenState
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateUserInputHiddenState: () => dispatch(updateUserInputHiddenState())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HideUserInput);

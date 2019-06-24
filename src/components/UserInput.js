@@ -20,9 +20,12 @@ class UserInput extends Component {
   };
 
   render() {
+    const { userInputHiddenState } = this.props;
+    let className = "form";
+    if (!userInputHiddenState) className += " hide";
     return (
       <form
-        className="form"
+        className={className}
         onSubmit={this.onSubmit}
         style={{ display: "flex", padding: "10px" }}
       >
@@ -38,7 +41,8 @@ class UserInput extends Component {
 const mapStateToProps = state => ({
   title: state.updateTitle,
   categoryIndex: state.updateCategoryIndex,
-  priorityIndex: state.updatePriorityIndex
+  priorityIndex: state.updatePriorityIndex,
+  userInputHiddenState: state.updateUserInputHiddenState
 });
 
 const mapDispatchToProps = dispatch => ({

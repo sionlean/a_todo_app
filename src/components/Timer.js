@@ -28,7 +28,7 @@ class Timer extends Component {
       <div className="timer">
         <form onSubmit={this.setTime}>
           <p>Set Timer</p>
-          <div>
+          <span>
             Hours:{" "}
             <input
               onChange={this.setHour}
@@ -38,18 +38,18 @@ class Timer extends Component {
               step="1"
               max="23"
             />
-            <span>
-              Minutes:{" "}
-              <input
-                onChange={this.setMin}
-                type="number"
-                value={min}
-                min="0"
-                step="1"
-                max="59"
-              />
-            </span>
-          </div>
+          </span>
+          <span>
+            Minutes:{" "}
+            <input
+              onChange={this.setMin}
+              type="number"
+              value={min}
+              min="0"
+              step="1"
+              max="59"
+            />
+          </span>
           <div className="note">
             Notes:
             <br />

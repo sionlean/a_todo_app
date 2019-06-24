@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|Varela+Round");
 
+/* general */
 body {
   margin: 0;
   padding: 0;
@@ -9,14 +10,13 @@ body {
   background-size: cover;
 }
 
-.dark {
-  background-color: #74828a;
+.btn {
+  transition: 0.3s all ease-out;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 7s linear;
-  height: 75px;
-  margin-right: 125px;
+/* used to toggle theme to add grey background  */
+.dark {
+  background-color: #74828a;
 }
 
 .cover {
@@ -37,67 +37,56 @@ body {
   }
 }
 
+/* hidden field to push sidenav and listitems down */
+.blank {
+  content: "";
+  height: 160px;
+}
+
+/* The whole navbar */
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  font-family: "Open Sans", sans-serif;
+  display: inline-block;
+}
+
 .navbar {
   z-index: 2;
   background-color: #879099;
   font-family: "Open Sans", sans-serif;
 }
 
+/* Nested inside Navbar */
 .navbar > .container-fluid {
   display: inline-block;
   text-align: center;
 }
 
-.btn {
-  transition: 0.3s all ease-out;
-}
-.form {
-  background-color: #879099;
-  font-family: "Varela Round", sans-serif;
-  transition: 0.5s all ease-out;
-  box-shadow: 5px 5px 5px #444;
-}
-
-.hide {
-  transform: translate3d(0, -70px, 0);
+/* Button to hide side Nav */
+.sideBtn {
+  transition: all 0.5s linear;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  padding: 5px;
 }
 
+/* TO-DO-List Wording */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 2rem;
+  transform: translate(3.5rem, 0.5rem);
+}
+
+/* +/- button for toggling user input */
 .showInput {
   border-radius: 50%;
   background-color: #556677;
 }
 
-.theme {
-  z-index: 4;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.theme > span {
-  z-index: 4;
-  color: black;
-  width: 20px;
-  height: 20px;
-}
-
-.form {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-.submit,
-.set {
-  color: white;
-  background-color: #9391ae;
-}
-
-.submit:hover,
-.set:hover {
-  background-color: #708292;
-  color: white;
-}
-
+/* reset button  */
 .reset {
   background-color: #54556f;
   margin-left: 50px;
@@ -108,17 +97,72 @@ body {
   background-color: #696969;
 }
 
-.header {
-  position: fixed;
-  width: 100%;
-  z-index: 2;
+/* React logo */
+.App-logo {
+  animation: App-logo-spin infinite 7s linear;
+  height: 75px;
+  margin-right: 125px;
 }
 
-.blank {
-  content: "";
-  height: 200px;
+/* user input */
+.form {
+  background-color: #879099;
+  font-family: "Varela Round", sans-serif;
+  transition: 0.5s all ease-out;
+  box-shadow: 0px 4px 5px #444;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: none;
 }
 
+/* User input text field */
+input.form-control {
+  min-width: 150px;
+  padding: 10px;
+  height: 50px;
+}
+
+/* class used to hide user input field */
+.hide {
+  transform: translate3d(0, -70px, 0);
+}
+
+/* submit button found in user input */
+.submit,
+.set {
+  min-width: 150px;
+  color: white;
+  background-color: #9391ae;
+}
+
+/* submit button on hover */
+.submit:hover,
+.set:hover {
+  background-color: #708292;
+  color: white;
+}
+
+/* Wrapper for SIDENAV & LISTITEM */
+.flex {
+  display: flex;
+  /* transition: 0.5s all ease-out; */
+}
+
+/* SIDENAV */
+.sidenav {
+  flex: 2;
+  background-color: rgba(150, 150, 175, 0.9);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #62627c;
+  margin: 1rem 2rem 2rem 2rem;
+  height: 1050px;
+  min-width: 320px;
+  font-family: "Open Sans", sans-serif;
+  transition: all 0.5s ease-out;
+}
+
+/* Components of Sidenav */
 .counterList,
 .toggleView,
 .timer,
@@ -145,12 +189,6 @@ body {
   margin: 0 auto;
 }
 
-.form > input.form-control {
-  flex: 5;
-  padding: 10;
-  height: 50px;
-}
-
 .counterList > p {
   display: inline-block;
   font-size: 1.2rem;
@@ -160,20 +198,6 @@ body {
 .counterList > span {
   background-color: #c4e6d5;
   font-size: 1rem;
-}
-
-.sidenav {
-  flex: 2;
-  background-color: rgba(150, 150, 175, 0.9);
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px #62627c;
-  margin: 1rem 2rem 2rem 2rem;
-  height: 1050px;
-  width: 400px;
-  max-width: 400px;
-  font-family: "Open Sans", sans-serif;
-  transition: all 0.5s ease-out;
 }
 
 .remove {
@@ -187,21 +211,6 @@ body {
 .sidenav:hover {
   transform: scale(1.02);
   transition: all 0.3s linear;
-}
-
-.sideBtn {
-  transition: all 0.5s linear;
-  position: absolute;
-  top: 30px;
-  left: 10px;
-  padding: 5px;
-}
-
-.sep {
-  display: inline;
-  font-size: 2.7rem;
-  color: grey;
-  cursor: default;
 }
 
 .toggleView > p {
@@ -221,6 +230,17 @@ body {
   transform: scale(1.2);
 }
 
+/* ListItems */
+
+.list > .flex > div {
+  flex: 0 1 auto;
+  text-align: center;
+  width: 40px;
+}
+
+.list > .flex > .flex-grow {
+  flex-grow: 1;
+}
 .list {
   transition: all 0.5s ease-out;
   margin-top: 1rem;
@@ -235,6 +255,7 @@ body {
 .listitem {
   margin: 2px 20px 5px 0px;
   font-family: "Varela Round", sans-serif;
+  transition: 0.5s all ease-out;
 }
 
 .listitemgrid {
@@ -280,19 +301,9 @@ body {
   transition: all 0.3s linear;
 }
 
-.navbar-brand {
-  font-weight: bold;
-  font-size: 2rem;
-  transform: translate(3.5rem, 0.5rem);
-}
-
-.flex {
-  display: flex;
-  transition: 0.5s all ease-out;
-}
-
 .header .selector {
   width: 15%;
+  min-width: 120px;
   height: 50px;
 }
 
@@ -304,44 +315,44 @@ body {
   margin: 10px;
 }
 
-@media screen and (max-width: 767px) {
-  /* Allow Column view */
-  .flex {
+/* @media screen and (max-width: 767px) { */
+/* Allow Column view */
+/* .flex {
     margin: 2rem auto;
     flex-direction: column;
-  }
-  /* Hide React Icon */
-  .cover {
+  } */
+/* Hide React Icon */
+/* .cover {
     display: none;
-  }
-  /* Adjust input width @ userinput */
-  .form > input.form-control {
+  } */
+/* Adjust input width @ userinput */
+/* .form > input.form-control {
     flex: 1.75;
-  }
-  /* move list items up when Sidenav is hidden */
-  .list.remove {
+  } */
+/* move list items up when Sidenav is hidden */
+/* .list.remove {
     transform: translate3d(0, -1100px, 0);
-  }
-  /* adjust sidenav to fit screen */
-  .sidenav {
+  } */
+/* adjust sidenav to fit screen */
+/* .sidenav {
     margin: 0 0 2rem 0rem;
-  }
-  /* increase textarea width */
-  textarea {
+  } */
+/* increase textarea width */
+/* textarea {
     width: 80%;
-  }
-  /* Downsize size of title */
-  .navbar-header p {
+  } */
+/* Downsize size of title */
+/* .navbar-header p {
     font-size: 1.7rem;
-  }
-  /* Adjust list items */
-  .listgrid {
+  } */
+/* Adjust list items */
+/* .listgrid {
     margin-left: 1.7rem;
     grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
-  /* Remove toggle view button for phone */
-  .fa-list,
+    grid-gap: 1rem; */
+/* } */
+/* Remove toggle view button for phone */
+/* .fa-list,
   .fa-th,
   .sep {
     display: none;
@@ -350,8 +361,9 @@ body {
   .flex {
     margin-top: 0;
   }
-}
+} */
 
+/* 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .flex {
     flex-direction: column;
@@ -386,4 +398,4 @@ body {
   .list.remove {
     transform: translate3d(-200px, 0, 0);
   }
-}
+} */

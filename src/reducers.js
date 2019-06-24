@@ -23,7 +23,8 @@ import {
   ACTION_SET_TIMER,
   ACTION_UPDATE_TITLE,
   ACTION_UPDATE_CATEGORY_INDEX,
-  ACTION_UPDATE_PRIORITY_INDEX
+  ACTION_UPDATE_PRIORITY_INDEX,
+  ACTION_UPDATE_USER_INPUT_HIDDEN_STATE
 } from "./actions";
 
 const DEFAULT_ITEM = new CreateListItem(
@@ -158,6 +159,15 @@ const updatePriorityIndex = (state = "0", action) => {
   }
 };
 
+const updateUserInputHiddenState = (state = "false", action) => {
+  switch (action.type) {
+    case ACTION_UPDATE_USER_INPUT_HIDDEN_STATE:
+      return !state;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   items,
   filterCategory,
@@ -166,7 +176,8 @@ export default combineReducers({
   setTimer,
   updateTitle,
   updateCategoryIndex,
-  updatePriorityIndex
+  updatePriorityIndex,
+  updateUserInputHiddenState
 }); //This will export an object to the store via index.js
 
 // const store = createStore(reducers);

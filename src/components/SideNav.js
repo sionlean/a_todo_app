@@ -4,17 +4,26 @@ import CounterList from "./CounterList";
 import Filter from "./Filter";
 import Timer from "./Timer";
 import { updateView, updateTheme } from "../actions";
+import { THEME, VIEW } from "../Constants";
 
 class SideNav extends Component {
   render() {
-    const { updateTheme, updateView } = this.props;
+    const { updateTheme, updateView, theme, view } = this.props;
+    let viewClassName = "fa fa-";
+    let themeClassName = "fa fa-";
+    theme === THEME.LIGHT
+      ? (themeClassName += "sun-o")
+      : (themeClassName += "moon-o");
+    view === VIEW.LIST
+      ? (viewClassName += "list-alt")
+      : (viewClassName += "clone");
+
     return (
       <div className="sidenav">
         <div className="toggleView">
           <p>Toggle View</p>
-          <span onClick={updateTheme} className="fa fa-sun-o" />
-          <p className="sep"> | </p>
-          <span onClick={updateView} className="fa fa-list" />
+          <span onClick={updateTheme} className={themeClassName} />
+          <span onClick={updateView} className={viewClassName} />
         </div>
         <CounterList />
         <Filter />
@@ -24,7 +33,10 @@ class SideNav extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  theme: state.updateTheme,
+  view: state.updateView
+});
 
 const mapDispatchToProps = dispatch => ({
   updateView: () => dispatch(updateView()),
