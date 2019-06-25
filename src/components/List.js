@@ -6,11 +6,11 @@ import { CATEGORY_ALL } from "../Constants";
 
 class List extends Component {
   render() {
-    const { currentView, items } = this.props;
+    const { currentView, items, sideNavHidden, userInputHidden } = this.props;
     let className = "list"; //Rerendering will cause it to always start from here, there is no need to remove the className.
-    if (currentView === VIEW.BLOCK) {
-      className += " flexGrid";
-    }
+    if (currentView === VIEW.BLOCK) className += " flexGrid";
+    if (sideNavHidden) className += " updateSidenavHidden";
+    if (!userInputHidden) className += " updateUserInputHidden";
     return (
       <div className={className}>
         {items.map(item => (
@@ -38,7 +38,9 @@ const mapStateToProps = state => {
   }
   return {
     items: filteredItems,
-    currentView: state.updateView
+    currentView: state.updateView,
+    sideNavHidden: state.updateSidenavHidden,
+    userInputHidden: state.updateUserInputHiddenState
   };
 };
 

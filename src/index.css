@@ -37,17 +37,17 @@ body {
   }
 }
 
-/* hidden field to push sidenav and listitems down */
+/* sideNavHidden field to push sidenav and listitems down */
 .blank {
   content: "";
-  height: 150px;
+  height: 160px;
 }
 
 /* The whole navbar */
 .header {
   position: fixed;
   width: 100%;
-  z-index: 2;
+  z-index: 5;
   font-family: "Open Sans", sans-serif;
   display: inline-block;
 }
@@ -59,6 +59,7 @@ body {
 
 .navbar {
   background-color: #879099;
+  z-index: 1;
 }
 
 /* Nested inside Navbar */
@@ -79,6 +80,7 @@ body {
 
 /* Button to hide side Nav */
 .sideBtn {
+  border-radius: 10px;
   transition: all 0.5s linear;
   padding: 5px;
 }
@@ -119,6 +121,8 @@ body {
   box-shadow: 0px 4px 5px #444;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  display: flex;
+  padding: 10px;
 }
 
 /* User input text field */
@@ -130,7 +134,7 @@ input.form-control {
 
 /* class used to hide user input field */
 .hide {
-  transform: translate3d(0, -50px, 0);
+  transform: translate(0, -50px);
 }
 
 /* submit button found in user input */
@@ -139,6 +143,7 @@ input.form-control {
   min-width: 150px;
   color: white;
   background-color: #9391ae;
+  flex: 1;
 }
 
 /* submit button on hover */
@@ -161,8 +166,8 @@ input.form-control {
   padding: 10px;
   border-radius: 10px;
   box-shadow: 5px 5px 10px #62627c;
-  margin: 1rem 0.3rem 2rem 0;
-  height: 1050px;
+  margin: 1rem 0.3rem 2rem 10px;
+  height: 1075px;
   min-width: 280px;
   font-family: "Open Sans", sans-serif;
   transition: all 0.5s ease-out;
@@ -210,7 +215,7 @@ input.form-control {
   transform: translate3d(-370px, 0, 0);
 }
 
-.sidenav.display {
+.sidenav.remove {
   display: none;
 }
 
@@ -271,7 +276,7 @@ input.form-control {
 }
 
 .listitem {
-  margin: 2px 0 5px 20px;
+  margin: 2px 10px 5px 10px;
   font-family: "Varela Round", sans-serif;
   transition: 0.5s all ease-out;
   padding: 15px;
@@ -379,9 +384,78 @@ input.form-control {
   }
 
   /* Alter navbar to 3 rows */
+  /* user input */
+  .form {
+    flex-direction: column;
+    padding: 10px;
+  }
+  /* User input text field */
+  .form-control {
+    text-align: center;
+    margin: 1px;
+    padding: 10px;
+    height: 40px;
+    flex: 1;
+  }
+
+  .header .selector {
+    width: 100%;
+  }
+
+  .header .selector option {
+    text-align: center;
+  }
+  .hide {
+    transform: translate3d(0, -170px, 0);
+  }
+
+  .navbar-header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navItem {
+    flex: 0 1 auto;
+    padding: 10px;
+    height: 50px;
+    width: 90px;
+  }
+  .title {
+    order: -1;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  .sideBtn {
+    width: 100px;
+  }
+  .navbar-header > .filler {
+    display: none;
+  }
+
+  .navbar {
+    padding: 0;
+  }
+
+  .sidenav.remove {
+    display: block;
+  }
+
+  .updateSidenavHidden {
+    transform: translate3d(0, -1150px, 0);
+  }
+
+  .blank {
+    content: "";
+    height: 270px;
+  }
+
+  .updateUserInputHidden {
+    transform: translate3d(0, -100px, 0);
+  }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1200px) {
+@media screen and (min-width: 597px) and (max-width: 1200px) {
 }
 
 @media screen and (min-width: 1201px) {

@@ -24,15 +24,11 @@ class UserInput extends Component {
     let className = "form";
     if (!userInputHiddenState) className += " hide";
     return (
-      <form
-        className={className}
-        onSubmit={this.onSubmit}
-        style={{ display: "flex", padding: "10px" }}
-      >
+      <form className={className} onSubmit={this.onSubmit}>
         <InputTask />
         <Category />
         <Priority />
-        <input style={{ flex: 1 }} className="btn submit" type="submit" />
+        <input className="btn submit" type="submit" />
       </form>
     );
   }

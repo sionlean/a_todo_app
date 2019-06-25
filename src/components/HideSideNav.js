@@ -1,30 +1,29 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { updateSidenavHidden } from "../actions";
 
 class HideSideNav extends Component {
-  addShow = () => {
-    const sideNav = document.getElementsByClassName("sidenav");
-    const btn = document.getElementsByClassName("sideBtn");
-    const list = document.getElementsByClassName("list");
-    sideNav[0].classList.toggle("remove");
-    list[0].classList.toggle("remove");
-    btn[0].classList.toggle("btn-danger");
-  };
-
-  styleBtn = {
-    borderRadius: "10px"
-  };
-
   render() {
+    const { updateSidenavHidden, sideNavHidden } = this.props;
+    let className = "btn btn-success sideBtn";
+    if (!sideNavHidden) className += " btn-danger";
     return (
-      <button
-        onClick={this.addShow}
-        style={this.styleBtn}
-        className="btn btn-success btn-danger sideBtn"
-      >
+      <button onClick={updateSidenavHidden} className={className}>
         Side Nav
       </button>
     );
   }
 }
 
-export default HideSideNav;
+const mapDispatchToProps = dispatch => ({
+  updateSidenavHidden: () => dispatch(updateSidenavHidden())
+});
+
+const mapStateToProps = state => ({
+  sideNavHidden: state.updateSidenavHidden
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HideSideNav);

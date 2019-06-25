@@ -8,18 +8,27 @@ import { THEME, VIEW } from "../Constants";
 
 class SideNav extends Component {
   render() {
-    const { updateTheme, updateView, theme, view } = this.props;
-    let viewClassName = "fa fa-";
+    const {
+      updateTheme,
+      updateView,
+      theme,
+      view,
+      sideNavHidden,
+      userInputHidden
+    } = this.props;
     let themeClassName = "fa fa-";
     theme === THEME.LIGHT
       ? (themeClassName += "sun-o")
       : (themeClassName += "moon-o");
+    let viewClassName = "fa fa-";
     view === VIEW.LIST
       ? (viewClassName += "list-alt")
       : (viewClassName += "clone");
+    let className = sideNavHidden ? "sidenav remove" : "sidenav";
+    if (!userInputHidden) className += " updateUserInputHidden";
 
     return (
-      <div className="sidenav">
+      <div className={className}>
         <div className="toggleView">
           <p>Toggle View</p>
           <span onClick={updateTheme} className={themeClassName} />
@@ -35,7 +44,9 @@ class SideNav extends Component {
 
 const mapStateToProps = state => ({
   theme: state.updateTheme,
-  view: state.updateView
+  view: state.updateView,
+  sideNavHidden: state.updateSidenavHidden,
+  userInputHidden: state.updateUserInputHiddenState
 });
 
 const mapDispatchToProps = dispatch => ({
