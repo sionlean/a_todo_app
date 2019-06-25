@@ -14,111 +14,86 @@ class ListItem extends Component {
   };
 
   //Stylings//
-  //TextArea Wrapper
-  textAreaWrapperStyle = () => {
-    const { view } = this.props;
-    const style = { flexGrow: 1, textAlign: "left", width: "100%" };
-    if (view === VIEW.BLOCK) {
-      style["order"] = 5;
-    }
-    return style;
-  };
-  //TextArea
-  textAreaStyle = () => {
-    return {
-      textDecoration: this.props.item.completed ? "line-through" : "none",
-      margin: 0,
-      fontSize: "0.9rem",
-      color: "black",
-      fontWeight: 400
-    };
-  };
-
-  //BinIcon Styling
-  binStyle = () => {
-    const { view } = this.props;
-    const style = {
-      float: "right",
-      color: "#555",
-      cursor: "pointer",
-      fontSize: "2rem"
-    };
-    if (view === VIEW.BLOCK) {
-      style["order"] = 4;
-      style["flexGrow"] = 1;
-      style["textAlign"] = "right";
-    }
-    return style;
-  };
-
-  //Dynamically choose bg color based on category
-  chooseCategoryStyle = () => {
-    const { item } = this.props;
-    const itemColor = CATEGORIES[item.categoryIndex].color;
-    return { background: itemColor };
-  };
-
   //Choose Icon
-  chooseIconStyle = () => {
+  categoryIconStyle = () => {
     const { item } = this.props;
-    const itemIcon = CATEGORIES[item.categoryIndex].icon;
+    let itemIcon = CATEGORIES[item.categoryIndex].icon;
+    itemIcon += " categoryIconStyle";
     return itemIcon;
   };
 
-  //Color Styling for priority Icon
-  priorityStyle = () => {
+  //
+  getTextField = () => {
     const { item } = this.props;
-    return {
-      color: PRIORITY_LEVEL[item.priorityIndex].color,
-      fontSize: "1.8rem"
-    };
+    let className = "textAreaStyle";
+    if (item.completed) className += " completed";
+    return (
+      <div className="textAreaWrapper">
+        <label className={className}>
+          <ContentEditable html={item.title} onChange={this.updateEdit} />
+        </label>
+      </div>
+    );
+  };
+
+  getTrashButton = () => {
+    const {
+      item: { id },
+      deleteItem
+    } = this.props;
+    const className = "fa fa-trash binIconStyle";
+    return (
+      <div
+        onClick={deleteItem.bind(this, id)} //
+        className={className}
+      />
+    );
   };
 
   //Create list items
   render() {
     const {
       currentView,
-      item: { id, title },
-      deleteItem,
+      item,
+      item: { id },
       toggleItem
     } = this.props;
-    let className = "flex listitem text-light clearfix rounded";
+    let className = "listitem rounded";
     if (currentView === VIEW.BLOCK) className += " listitemgrid";
+    console.log(item);
     return (
-      <div style={this.chooseCategoryStyle()} className={className}>
-        {/* CHECKBOX */}
-        <div>
-          <input
-            className="align-middle"
-            style={{ flex: 1, height: 30 }}
-            type="checkbox"
-            onChange={toggleItem.bind(this, id)}
-          />
-        </div>
-        {/* ICON */}
-        <div
-          style={{ fontSize: "2rem", color: "#555" }}
-          className={this.chooseIconStyle()}
-        />
-        {/* PRIORITY */}
-        <div
-          style={this.priorityStyle()}
-          className="fa fa-exclamation-circle"
-        />
-
-        {/* TEXTFIELD */}
-        <div style={this.textAreaWrapperStyle()}>
-          <label style={this.textAreaStyle()}>
-            <ContentEditable html={title} onChange={this.updateEdit} />
-          </label>
-        </div>
-        {/* BINICON */}
-        <div
-          onClick={deleteItem.bind(this, id)} //
-          className="fa fa-trash"
-          style={this.binStyle()}
-        >
-          {" "}
+      <div
+        style={{ background: CATEGORIES[item.categoryIndex].color }}
+        className={className}
+      >
+        {/* list item flex wrapper */}
+        <div className="flex">
+          {/* Icons flex wrapper */}
+          <div className="flex flexicons">
+            {/* CHECKBOX */}
+            <input
+              type="checkbox"
+              checked={item.completed}
+              onChange={toggleItem.bind(this, id)}
+            />
+            {/* CATEGORY ICON */}
+            <div className={this.categoryIconStyle()} />
+            {/* PRIORITY */}
+            <div
+              style={{ color: PRIORITY_LEVEL[item.priorityIndex].color }}
+              className="fa fa-exclamation-circle"
+            />
+            {/* filler */}
+            {currentView === VIEW.BLOCK && <div className="filler" />}
+            {/* BIN BUTTON */}
+            {currentView === VIEW.BLOCK && this.getTrashButton()}
+            {currentView === VIEW.LIST && this.getTextField()}
+            {currentView === VIEW.LIST && this.getTrashButton()}
+          </div>
+          <div>
+            {/* text box area */}
+            {currentView === VIEW.BLOCK && this.getTextField()}
+          </div>
         </div>
       </div>
     );

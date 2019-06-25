@@ -40,7 +40,7 @@ body {
 /* hidden field to push sidenav and listitems down */
 .blank {
   content: "";
-  height: 160px;
+  height: 150px;
 }
 
 /* The whole navbar */
@@ -50,6 +50,12 @@ body {
   z-index: 2;
   font-family: "Open Sans", sans-serif;
   display: inline-block;
+}
+
+.header .selector {
+  width: 15%;
+  min-width: 120px;
+  height: 40px;
 }
 
 .navbar {
@@ -119,12 +125,12 @@ body {
 input.form-control {
   min-width: 150px;
   padding: 10px;
-  height: 50px;
+  height: 40px;
 }
 
 /* class used to hide user input field */
 .hide {
-  transform: translate3d(0, -70px, 0);
+  transform: translate3d(0, -50px, 0);
 }
 
 /* submit button found in user input */
@@ -143,8 +149,9 @@ input.form-control {
 }
 
 /* Wrapper for SIDENAV & LISTITEM */
-.flex {
+.App > .flex {
   display: flex;
+  padding: 0 20px 0 20px;
 }
 
 /* SIDENAV */
@@ -154,7 +161,7 @@ input.form-control {
   padding: 10px;
   border-radius: 10px;
   box-shadow: 5px 5px 10px #62627c;
-  margin: 1rem 2rem 2rem 2rem;
+  margin: 1rem 0.3rem 2rem 0;
   height: 1050px;
   min-width: 320px;
   font-family: "Open Sans", sans-serif;
@@ -229,9 +236,28 @@ input.form-control {
   transform: scale(1.2);
 }
 
+/* for Textarea */
+.note {
+  margin: 10px;
+}
+
+.sidenav .selector {
+  width: 70%;
+}
+
 /* ListItems */
+.flex {
+  display: flex;
+}
+
+.list {
+  transition: all 0.5s ease-out;
+  margin-top: 1rem;
+  flex: 10;
+}
+
 .list > .flex {
-  align-items: center;
+  display: flex;
 }
 
 .list > .flex > div {
@@ -243,17 +269,27 @@ input.form-control {
 .list > .flex > .flex-grow {
   flex-grow: 1;
 }
-.list {
-  transition: all 0.5s ease-out;
-  margin-top: 1rem;
-  flex: 10;
-}
 
 .listitem {
-  margin: 2px 20px 5px 0px;
+  margin: 2px 0 5px 20px;
   font-family: "Varela Round", sans-serif;
   transition: 0.5s all ease-out;
   padding: 15px;
+  align-items: center;
+}
+
+.listitem > .flex {
+  flex-direction: column;
+}
+
+.flexicons {
+  align-items: center;
+}
+
+.flexicons > * {
+  flex: 0 0 40px;
+  text-align: center;
+  font-size: 1.7rem;
 }
 
 .listitem:hover {
@@ -261,16 +297,45 @@ input.form-control {
   transition: all 0.3s linear;
 }
 
+/* Individual styling */
+.categoryIconStyle {
+  color: #555;
+}
+
+.binIconStyle {
+  color: #555;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.textAreaStyle {
+  font-size: 0.9rem;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.textAreaWrapper {
+  flex-grow: 1;
+  text-align: left;
+  width: 100%;
+}
+
+.filler {
+  flex: 1;
+}
+
 /* grid view */
 
 .flexGrid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  flex-flow: row wrap;
+  justify-content: space-between;
   align-content: flex-start;
 }
 
-.list > .listitemgrid {
+.listitemgrid {
   width: 250px;
   height: 250px;
   min-height: 250px;
@@ -278,20 +343,15 @@ input.form-control {
   align-content: flex-start;
   justify-content: flex-start;
   flex-wrap: wrap;
+  flex-grow: 1;
 }
 
-.header .selector {
-  width: 15%;
-  min-width: 120px;
-  height: 50px;
-}
-
-.sidenav .selector {
-  width: 70%;
-}
-
-.note {
-  margin: 10px;
+.listitemgridfiller {
+  background-color: black;
+  flex: 1 0 250px;
+  height: 0;
+  border: none;
+  margin: 2px 0 5px 20px;
 }
 
 /* @media screen and (max-width: 767px) { */

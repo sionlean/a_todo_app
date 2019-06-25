@@ -8,11 +8,11 @@ import { deleteItem, toggleItem, editItem } from "../actions";
 class List extends Component {
   render() {
     const { currentView, items, deleteItem, editItem, toggleItem } = this.props;
-
     let className = "list"; //Rerendering will cause it to always start from here, there is no need to remove the className.
     if (currentView === VIEW.BLOCK) {
       className += " flexGrid";
     }
+    console.log(items);
     return (
       <div className={className}>
         {items.map(item => (
@@ -25,6 +25,13 @@ class List extends Component {
             toggleItem={toggleItem}
           />
         ))}
+        <div className="listitemgridfiller" />
+        <div className="listitemgridfiller" />
+        <div className="listitemgridfiller" />
+        <div className="listitemgridfiller" />
+        <div className="listitemgridfiller" />
+        <div className="listitemgridfiller" />
+        <div className="listitemgridfiller" />
       </div>
     );
   }

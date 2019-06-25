@@ -50,13 +50,10 @@ const items = (state = [DEFAULT_ITEM], action) => {
     case ACTION_ITEM_RESET:
       return [];
     case ACTION_ITEM_TOGGLE:
-      state = state.map(item => {
-        if (item.id === action.id) {
-          item.completed = !item.completed;
-        }
-        return item;
-      });
-      return state;
+      return state.map(item => ({
+        ...item,
+        completed: item.id === action.id ? !item.completed : item.completed
+      }));
     case ACTION_ITEM_EDIT:
       const newItems = [...state];
       for (let i = 0; i < state.length; i++) {
