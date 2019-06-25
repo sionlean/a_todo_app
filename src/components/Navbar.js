@@ -11,15 +11,25 @@ class Navbar extends Component {
       <div className="header">
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
-            <HideSideNav />
-            <div className="cover">
-              <img src={logo} className="App-logo" alt="logo" />
-            </div>
+            <div className="cover" />
             <div className="navbar-header">
-              <p className="navbar-brand">
-                To-Do List <HideUserInput />
-              </p>
-              <Reset />
+              <div className="navItem">
+                <HideSideNav className="navItem" />
+              </div>
+
+              <div className="filler" />
+
+              <p className="title navItem">To-Do List</p>
+              <div className="navItem">
+                <HideUserInput className="navItem" />
+              </div>
+              <div className="navItem">
+                <Reset />
+              </div>
+
+              <div className="filler" />
+
+              <img src={logo} className="App-logo navItem" alt="logo" />
             </div>
           </div>
         </nav>
