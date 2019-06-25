@@ -53,7 +53,7 @@ body {
 }
 .header .selector {
   width: 15%;
-  min-width: 120px;
+  min-width: 130px;
   height: 40px;
 }
 
@@ -163,7 +163,7 @@ input.form-control {
   box-shadow: 5px 5px 10px #62627c;
   margin: 1rem 0.3rem 2rem 0;
   height: 1050px;
-  min-width: 320px;
+  min-width: 280px;
   font-family: "Open Sans", sans-serif;
   transition: all 0.5s ease-out;
 }
@@ -354,15 +354,31 @@ input.form-control {
   margin: 2px 0 5px 20px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 596px) {
   .App > .flex {
+    padding: 0;
     display: block;
   }
-
   /* remove react logo */
   .App-logo {
     display: none;
   }
+
+  .list {
+    padding: 10px;
+  }
+
+  .listitem {
+    margin: 2px 5px 5px 5px;
+  }
+
+  .sidenav {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 280px;
+  }
+
+  /* Alter navbar to 3 rows */
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
