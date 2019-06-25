@@ -3,27 +3,18 @@ import ListItem from "./ListItem";
 import { VIEW } from "../Constants";
 import { connect } from "react-redux";
 import { CATEGORY_ALL } from "../Constants";
-import { deleteItem, toggleItem, editItem } from "../actions";
 
 class List extends Component {
   render() {
-    const { currentView, items, deleteItem, editItem, toggleItem } = this.props;
+    const { currentView, items } = this.props;
     let className = "list"; //Rerendering will cause it to always start from here, there is no need to remove the className.
     if (currentView === VIEW.BLOCK) {
       className += " flexGrid";
     }
-    console.log(items);
     return (
       <div className={className}>
         {items.map(item => (
-          <ListItem
-            currentView={currentView}
-            item={item}
-            key={item.id}
-            deleteItem={deleteItem}
-            editItem={editItem}
-            toggleItem={toggleItem}
-          />
+          <ListItem currentView={currentView} item={item} key={item.id} />
         ))}
         <div className="listitemgridfiller" />
         <div className="listitemgridfiller" />
@@ -51,13 +42,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  deleteItem: id => dispatch(deleteItem(id)),
-  toggleItem: id => dispatch(toggleItem(id)),
-  editItem: (id, newTitle) => dispatch(editItem(id, newTitle))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(List);
+export default connect(mapStateToProps)(List);

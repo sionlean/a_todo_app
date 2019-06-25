@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ContentEditable from "react-contenteditable";
 import { CATEGORIES, PRIORITY_LEVEL, VIEW } from "../Constants";
 import { connect } from "react-redux";
+import { deleteItem, toggleItem, editItem } from "../actions";
 
 class ListItem extends Component {
   updateEdit = e => {
@@ -60,7 +61,6 @@ class ListItem extends Component {
     } = this.props;
     let className = "listitem rounded";
     if (currentView === VIEW.BLOCK) className += " listitemgrid";
-    console.log(item);
     return (
       <div
         style={{ background: CATEGORIES[item.categoryIndex].color }}
@@ -100,8 +100,17 @@ class ListItem extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  deleteItem: id => dispatch(deleteItem(id)),
+  toggleItem: id => dispatch(toggleItem(id)),
+  editItem: (id, newTitle) => dispatch(editItem(id, newTitle))
+});
+
 const mapStateToProps = state => ({
   view: state.updateView
 });
 
-export default connect(mapStateToProps)(ListItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListItem);
